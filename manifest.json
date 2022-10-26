@@ -100,7 +100,7 @@
                 "enable" : true
             }
         },
-        "template" : "count.html",
+        "template" : "",
         "title" : "战矛伤害模拟器"
     }
 }

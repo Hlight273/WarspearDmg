@@ -1,30 +1,33 @@
 <template>
-	<!-- #ifdef H5 -->
-	<div id="logo" style="height:180upx;"></div>
-	<h2 id="webtitle"><!-- 战矛在线伤害模拟器 --></h2>
-	<!-- #endif -->
-	<!-- #ifndef H5 -->
-	<div id="logo" style="height:200upx;"></div>
-	<h2 id="webtitle"><!-- 战矛在线伤害模拟器 --></h2>
-	<!-- #endif -->
-	<view class="container">
+	<view>
+		<!-- #ifdef H5 -->
+		<div id="logo" style="height:180upx;"></div>
+		<h2 id="webtitle"><!-- 战矛在线伤害模拟器 --></h2>
+		<!-- #endif -->
+		<!-- #ifndef H5 -->
+		<div id="logo" style="height:200upx;"></div>
+		<h2 id="webtitle"><!-- 战矛在线伤害模拟器 --></h2>
+		<!-- #endif -->
+		<div class="container">
+			
+			<switcher @changeIndex="changePage"></switcher>
 		
-		<switcher @changeIndex="changePage"></switcher>
-
-		<div  v-if="PageIndex==1">
-			<calc></calc>
+			<div  v-if="PageIndex==1">
+				<calc></calc>
+			</div>
+			
+			<div v-if="PageIndex==2">
+				<DmgInFight></DmgInFight>
+			</div>
+			
 		</div>
-		
-		<div v-if="PageIndex==2">
-			<DmgInFight></DmgInFight>
-		</div>
-		
+		<div style="height: 5upx;"></div>
+		<div class="author">作者qq2732149714，请联系他修复bug！<br>
+		数据仅供参考，实际效果以游戏为准！<br>
+		战矛萌新群群号: 851922086 <br>
+		传送门：<a target=“_blank” href="https://aurora.wsdb.xyz/en/calculator">战矛做梦器</a></div>
 	</view>
-	<div style="height: 5upx;"></div>
-	<div class="author">作者qq2732149714，请联系他修复bug！<br>
-	数据仅供参考，实际效果以游戏为准！<br>
-	战矛萌新群群号: 851922086 <br>
-	传送门：<a target=“_blank” href="https://aurora.wsdb.xyz/en/calculator">战矛做梦器</a></div>
+	
 </template>
 
 <script>

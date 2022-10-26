@@ -1,135 +1,138 @@
 <template>
-	<div id="calc_box">
-		<uni-section title="基础伤害" type="line" padding>
-			<div id="DMG_base"><h4>基础数值：{{DMG_base_phys}}/{{DMG_base_mag}}</h4></div>
-			
-			<div style="height: 20upx;"></div>
-			<div class="titlebox">
-				<div class="subtitile">人物等级</div>
-				<uni-easyinput prefixIcon="" v-model="playerLV" 
-							   placeholder="输入等级" 
-							   style="width: 120px;margin: auto 25upx;">
-				</uni-easyinput>
-				<div style="height: 50upx;"></div>
-			</div>
-			
-			<div class="titlebox">
-				<div class="subtitile">主手伤害</div>
-				<div class="numbar"> 
-					<img src="https://aurora.wsdb.xyz/icons/95.webp" alt="物理"> 
-					<uni-number-box v-model="dmgPhyBase_main" :min="0" :max="2000"/>
+	<div>
+		<div id="calc_box">
+			<uni-section title="基础伤害" type="line" padding>
+				<div id="DMG_base"><h4>基础数值：{{DMG_base_phys}}/{{DMG_base_mag}}</h4></div>
+				
+				<div style="height: 20upx;"></div>
+				<div class="titlebox">
+					<div class="subtitile">人物等级</div>
+					<uni-easyinput prefixIcon="" v-model="playerLV" 
+								   placeholder="输入等级" 
+								   style="width: 120px;margin: auto 25upx;">
+					</uni-easyinput>
+					<div style="height: 50upx;"></div>
 				</div>
-				<div class="numbar"> 
-					<img src="https://aurora.wsdb.xyz/icons/897.webp" alt="法术"> 
-					<uni-number-box v-model="dmgMagBase_main" :min="0" :max="2000"/>
+				
+				<div class="titlebox">
+					<div class="subtitile">主手伤害</div>
+					<div class="numbar"> 
+						<img src="https://aurora.wsdb.xyz/icons/95.webp" alt="物理"> 
+						<uni-number-box v-model="dmgPhyBase_main" :min="0" :max="2000"/>
+					</div>
+					<div class="numbar"> 
+						<img src="https://aurora.wsdb.xyz/icons/897.webp" alt="法术"> 
+						<uni-number-box v-model="dmgMagBase_main" :min="0" :max="2000"/>
+					</div>
+					<div style="height: 100upx;"></div>
 				</div>
-				<div style="height: 100upx;"></div>
-			</div>
+						
+				<div class="titlebox">
+					<div class="subtitile">副手伤害</div>
+					<div class="numbar"> 
+						<img src="https://aurora.wsdb.xyz/icons/95.webp" alt="物理"> 
+						<uni-number-box v-model="dmgPhyBase_acc" :min="0" :max="2000"/>
+					</div>
+					<div class="numbar"> 
+						<img src="https://aurora.wsdb.xyz/icons/897.webp" alt="法术"> 
+						<uni-number-box v-model="dmgMagBase_acc" :min="0" :max="2000"/>
+					</div>
+					<div style="height: 80upx;"></div>
+				</div>
+			</uni-section>
+			
+			<jewelry ref="jewe" @jeweChanged="getJeweDMG"></jewelry>
+			
+			<uni-section title="BUFF增益" type="line" padding>
+				<div style="height:20upx;"></div>
+				<div class="titlebox l">
+					<div class="subtitile">药水</div>
+					<uni-data-select
+							style="width:160px;"
+							v-model="potionValue"
+							:localdata="potionRange"
+							@change="change"
+							:clear="false"
+						  ></uni-data-select>
+				</div>
+				<div class="titlebox r">
+					<div class="subtitile">卷轴</div>
+					<uni-data-select
+							style="width:160px;"
+							v-model="scrollValue"
+							:localdata="scrollRange"
+							@change="change"
+							:clear="false"
+						  ></uni-data-select>
+				</div>
+				<div style="height:80upx;"></div>
+			</uni-section>
+			
+			
+			<uni-section title="其他增益" type="line" padding>
+				<div style="height: 20upx;"></div>
+				<div>
+					<div class="titlebox l">
+						<div class="subtitile">工会力量</div>
+						<img style="float: left;" src="https://aurora.wsdb.xyz/icons/3171.webp" alt="">
+						<uni-easyinput  placeholder="10%" :disabled="true" style="float: left;width: 80px;margin: auto 25upx;">
+						</uni-easyinput>
+						<uni-fav :checked="guildPower" :star="false" class="enableBtn" 
+								 @click="this.guildPower = !this.guildPower" 
+								 :content-text="TextTrue"
+								 :circle="true"
+								 style="float: left;width: 25px;"/>
+						<div style="height: 50upx;"></div>
+					</div>
 					
-			<div class="titlebox">
-				<div class="subtitile">副手伤害</div>
-				<div class="numbar"> 
-					<img src="https://aurora.wsdb.xyz/icons/95.webp" alt="物理"> 
-					<uni-number-box v-model="dmgPhyBase_acc" :min="0" :max="2000"/>
-				</div>
-				<div class="numbar"> 
-					<img src="https://aurora.wsdb.xyz/icons/897.webp" alt="法术"> 
-					<uni-number-box v-model="dmgMagBase_acc" :min="0" :max="2000"/>
-				</div>
-				<div style="height: 80upx;"></div>
-			</div>
-		</uni-section>
-		
-		<jewelry ref="jewe" @jeweChanged="getJeweDMG"></jewelry>
-		
-		<uni-section title="BUFF增益" type="line" padding>
-			<div style="height:20upx;"></div>
-			<div class="titlebox l">
-				<div class="subtitile">药水</div>
-				<uni-data-select
-						style="width:160px;"
-						v-model="potionValue"
-						:localdata="potionRange"
-						@change="change"
-						:clear="false"
-					  ></uni-data-select>
-			</div>
-			<div class="titlebox r">
-				<div class="subtitile">卷轴</div>
-				<uni-data-select
-						style="width:160px;"
-						v-model="scrollValue"
-						:localdata="scrollRange"
-						@change="change"
-						:clear="false"
-					  ></uni-data-select>
-			</div>
-			<div style="height:80upx;"></div>
-		</uni-section>
-		
-		
-		<uni-section title="其他增益" type="line" padding>
-			<div style="height: 20upx;"></div>
-			<div>
-				<div class="titlebox l">
-					<div class="subtitile">工会力量</div>
-					<img style="float: left;" src="https://aurora.wsdb.xyz/icons/3171.webp" alt="">
-					<uni-easyinput  placeholder="10%" :disabled="true" style="float: left;width: 80px;margin: auto 25upx;">
-					</uni-easyinput>
-					<uni-fav :checked="guildPower" :star="false" class="enableBtn" 
-							 @click="this.guildPower = !this.guildPower" 
-							 :content-text="TextTrue"
-							 :circle="true"
-							 style="float: left;width: 25px;"/>
-					<div style="height: 50upx;"></div>
+					<div class="titlebox r">
+						<div class="subtitile">肆虐加成</div>
+						<img style="float: left;" src="https://aurora.wsdb.xyz/icons/3146.webp" alt="">
+						<uni-easyinput  suffixIcon="x" placeholder="10%" :disabled="true" style="float: left;width: 80px;margin: auto 25upx;">
+						</uni-easyinput>
+						<uni-fav :checked="ragePower" :star="false" class="enableBtn" 
+								 @click="this.ragePower = !this.ragePower" 
+								 :content-text="TextTrue"
+								 :circle="true"
+								 style="float: left;width: 25px;"/>
+						<div style="height: 50upx;"></div>
+					</div>
 				</div>
 				
-				<div class="titlebox r">
-					<div class="subtitile">肆虐加成</div>
-					<img style="float: left;" src="https://aurora.wsdb.xyz/icons/3146.webp" alt="">
-					<uni-easyinput  suffixIcon="x" placeholder="10%" :disabled="true" style="float: left;width: 80px;margin: auto 25upx;">
-					</uni-easyinput>
-					<uni-fav :checked="ragePower" :star="false" class="enableBtn" 
-							 @click="this.ragePower = !this.ragePower" 
-							 :content-text="TextTrue"
-							 :circle="true"
-							 style="float: left;width: 25px;"/>
-					<div style="height: 50upx;"></div>
-				</div>
-			</div>
-			
-			<div style="height: 118upx;"></div>
-			
-			<div>
-				<div class="titlebox l">
-					<div class="subtitile">才能加成 %</div>
-					<image style="float: left;width: 30px;height: 30px;" src="/static/image/talent.png" alt="才能"></image>
-					<uni-number-box v-model="talentPower" :min="0" :max="2.25" :step="0.25" @change="change" style="margin:10upx 40upx;"/>
-					<div style="height: 50upx;"></div>
+				<div style="height: 118upx;"></div>
+				
+				<div>
+					<div class="titlebox l">
+						<div class="subtitile">才能加成 %</div>
+						<image style="float: left;width: 30px;height: 30px;" src="/static/image/talent.png" alt="才能"></image>
+						<uni-number-box v-model="talentPower" :min="0" :max="2.25" :step="0.25" @change="change" style="margin:10upx 40upx;"/>
+						<div style="height: 50upx;"></div>
+					</div>
+					
+					<div class="titlebox r">
+						<div class="subtitile">其他加成% <!-- / 数值 --></div>
+						<!-- <img style="float: left;" src="https://aurora.wsdb.xyz/icons/4981.webp" alt=""> -->
+						<uni-easyinput v-model="dmgOther1" type=Number placeholder="%"  style="float: right;width: 127px;margin-right: 38px;">
+						</uni-easyinput>
+						<!-- <uni-easyinput v-model="dmgOther2" placeholder=""  style="float: left;width: 70px;margin-right: 75upx;">
+						</uni-easyinput> -->
+					</div>
 				</div>
 				
-				<div class="titlebox r">
-					<div class="subtitile">其他加成% <!-- / 数值 --></div>
-					<!-- <img style="float: left;" src="https://aurora.wsdb.xyz/icons/4981.webp" alt=""> -->
-					<uni-easyinput v-model="dmgOther1" type=Number placeholder="%"  style="float: right;width: 127px;margin-right: 38px;">
-					</uni-easyinput>
-					<!-- <uni-easyinput v-model="dmgOther2" placeholder=""  style="float: left;width: 70px;margin-right: 75upx;">
-					</uni-easyinput> -->
-				</div>
-			</div>
-			
-			<div style="height:80upx;"></div>
+				<div style="height:80upx;"></div>
+			</uni-section>
+		</div>
+		
+		<div style="height: 30upx;"></div>
+		
+		<uni-section title="计算结果" type="line" id="result_box" padding>
+			<uni-tag text="物理伤害" type="error" /><span class="DMG_final">{{getDMG_phys}}</span>
+			<div style="height: 30upx;"></div>
+			<uni-tag text="法术伤害" type="primary" /><span class="DMG_final">{{getDMG_mag}}</span>
+			<div style="height: 40upx;"></div>
 		</uni-section>
 	</div>
-
-	<div style="height: 30upx;"></div>
 	
-	<uni-section title="计算结果" type="line" id="result_box" padding>
-		<uni-tag text="物理伤害" type="error" /><span class="DMG_final">{{getDMG_phys}}</span>
-		<div style="height: 30upx;"></div>
-		<uni-tag text="法术伤害" type="primary" /><span class="DMG_final">{{getDMG_mag}}</span>
-		<div style="height: 40upx;"></div>
-	</uni-section>
 </template>
 
 <script>

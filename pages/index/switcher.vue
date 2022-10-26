@@ -1,19 +1,20 @@
 <template>
-	
-	<div id="bars"  @click="open">
-		<uni-icons type="bars" size="30" color="gray"></uni-icons>
-	</div>
-	<uni-popup ref="popup" type="left">
-		<div class="mybox">
-			<div class="myboxtitle"><image src="../../static/image/warpearhelp.png" id="wshelp"></image>战矛辅助工具</div>
-			<ui>
-				<li class="goto" @click="clickGoTo($event)" id="1"><uni-icons type="forward" size="16" color="dimgray"></uni-icons>战矛伤害模拟器</li>
-				<li class="goto" @click="clickGoTo($event)" id="2"><uni-icons type="forward" size="16" color="dimgray"></uni-icons>战矛伤害公式原理</li>
-				<li class="goto" @click="clickGoTo($event)" id="3"><uni-icons type="forward" size="16" color="dimgray"></uni-icons>战矛小知识1</li>
-				<li class="goto" @click="clickGoTo($event)" id="4"><uni-icons type="forward" size="16" color="dimgray"></uni-icons>战矛小知识2</li>
-			</ui>
+	<div>
+		<div id="bars"  @click="open">
+			<uni-icons type="bars" size="30" color="gray"></uni-icons>
 		</div>
-	</uni-popup>
+		<uni-popup ref="popup" type="left">
+			<div class="mybox">
+				<div class="myboxtitle"><image src="../../static/image/warpearhelp.png" id="wshelp"></image>战矛辅助工具</div>
+				<ul>
+					<li class="goto" @click="clickGoTo($event)" id="1"><uni-icons type="forward" size="16" color="dimgray"></uni-icons>战矛伤害模拟器</li>
+					<li class="goto" @click="clickGoTo($event)" id="2"><uni-icons type="forward" size="16" color="dimgray"></uni-icons>战矛伤害公式原理</li>
+					<li class="goto" @click="clickGoTo($event)" id="3"><uni-icons type="forward" size="16" color="dimgray"></uni-icons>战矛小知识1</li>
+					<li class="goto" @click="clickGoTo($event)" id="4"><uni-icons type="forward" size="16" color="dimgray"></uni-icons>战矛小知识2</li>
+				</ul>
+			</div>
+		</uni-popup>
+	</div>
 </template>
 
 <script>

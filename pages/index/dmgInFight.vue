@@ -1,129 +1,130 @@
 <template>
-	<uni-section title="战矛伤害计算公式" type="line" padding>
-		<div style="padding:20px;padding-top: 5px;">
-			伤害计算公式:
+	<div>
+		<uni-section title="战矛伤害计算公式" type="line" padding>
+			<div style="padding:20px;padding-top: 5px;">
+				伤害计算公式:
+				<br><br>
+				<center>
+					<span class="huati">D = ((X + Y%) - A%) - B%</span>
+				</center>
+				<div class="huatiinfo">
+					<br>D - 最终造成的伤害
+					<br>X - 你的伤害值  
+					<br>Y - 你的凶猛度
+					<br>A - 目标防御比例（已减去穿透百分比）  
+					<br>B - 目标弹性
+					<br>注：此处的加减表示×(1±x%)
+				</div>
+			</div>
+		</uni-section>
+		
+		<uni-section title="基础伤害属性 (%)" type="line" style="" padding>
+			<div class="props"><image @click="show($event,-1)" src="../../static/image/dmg.png"></image>
+				<uni-number-box :value="dmg" @change="(v)=>{dmg=v}" :max="9999" :min="0" :step="0.1" /></div>
+			<div style="float: left;width: 100px;height: 30px;margin-bottom: 5px;"></div>
+			<div class="props"><image @click="show($event,0)" :src="iconURL(attrs[0])"></image>
+				<uni-number-box :value="acc" @change="(v)=>{acc=v}" :max="50" :min="-999" :step="0.1" /></div>
+			<div class="props"><image @click="show($event,1)" :src="iconURL(attrs[1])"></image>
+				<uni-number-box :value="pene" @change="(v)=>{pene=v}" :max="50" :step="0.1" /></div>
+			<div class="props"><image @click="show($event,2)" :src="iconURL(attrs[2])"></image>
+				<uni-number-box :value="crit" @change="(v)=>{crit=v}" :max="53" :min="0" :step="0.1"/></div>
+			<div class="props"><image @click="show($event,3)" :src="iconURL(attrs[3])"></image>
+				<uni-number-box :value="speed" @change="(v)=>{speed=v}" :max="70" :min="-999" :step="0.1" /></div>
+		</uni-section>
+		
+		<uni-section title="附加伤害属性 (%)" type="line" style="" padding>
+			<div class="props"><image @click="show($event,4)" :src="iconURL(attrs[4])"></image>
+				<uni-number-box :value="atk" @change="(v)=>{atk=v}" :max="100" :step="0.1" /></div>
+			<div class="props"><image @click="show($event,5)" :src="iconURL(attrs[5])"></image>
+				<uni-number-box :value="criteff" @change="(v)=>{criteff=v}" :max="150" :min="100" :step="0.1" /></div>
+			<div class="props"><image @click="show($event,6)" :src="iconURL(attrs[6])"></image>
+				<uni-number-box :value="pirck" @change="(v)=>{pirck=v}" :max="999" :step="0.1" /></div>
+			<div class="props"><image @click="show($event,7)" :src="iconURL(attrs[7])"></image>
+				<uni-number-box :value="fury" @change="(v)=>{fury=v}" :max="50" :step="0.1" /></div>
+			<div class="props"><image @click="show($event,8)" :src="iconURL(attrs[8])"></image>
+				<uni-number-box :value="rage" @change="(v)=>{rage=v}" :max="999" :step="0.1" /></div>
+		</uni-section>
+		
+		<uni-section title="目标防御属性" type="line" style="" padding>
+			<div class="def_data_box">
+				<div class="props"><image @click="show($event,9)" :src="iconURL(attrs[9])"></image>
+					<uni-number-box :value="defP" @change="(v)=>{defP=v}" :max="26000" /></div>
+				<div class="def_data">{{defphyPercent}}</div>
+			</div>
+			<div class="def_data_box">
+				<div class="props"><image @click="show($event,10)" :src="iconURL(attrs[10])"></image>
+					<uni-number-box :value="defM" @change="(v)=>{defM=v}" :max="26000" /></div>
+				<div class="def_data">{{defmagPercent}}</div>
+			</div>
+			<div class="props"><image @click="show($event,11)" :src="iconURL(attrs[11])"></image>
+				<uni-number-box :value="dodge" @change="(v)=>{dodge=v}" :max="60" :min="-20" :step="0.1" /></div>
+			<div class="props"><image @click="show($event,12)" :src="iconURL(attrs[12])"></image>
+				<uni-number-box :value="parry" @change="(v)=>{parry=v}" :max="30" :step="0.1" /></div>
+			<div class="props"><image @click="show($event,13)" :src="iconURL(attrs[13])"></image>
+				<uni-number-box :value="block" @change="(v)=>{block=v}" :max="25" :step="0.1" /></div>
+		</uni-section>
+		
+		<uni-section title="武器类型" type="line" style="" padding>
+			<div class="titlebox l">
+				<div class="subtitile">主手武器类型</div>
+				<uni-data-select
+					style="width:160px;"
+					v-model="weaponL"
+					:localdata="weaponLRange"
+					@change="(v)=>{
+						weaponL=v;
+						if(weaponL>4 && weaponR!=0) weaponR = 0;
+					}"
+					:clear="false">
+				</uni-data-select>
+			</div>
+			<div class="titlebox r">
+				<div class="subtitile">副手武器类型</div>
+				<uni-data-select
+					style="width:160px;"
+					v-model="weaponR"
+					:localdata="weaponRRange"
+					@change="(v)=>{weaponR=v;}"
+					:clear="false"
+					:disabled="(weaponL>4)?true:false">
+				</uni-data-select>
+			</div>
+			<div class="iconbox_tiny l">
+				<image src="../../static/image/attribute/spd.png"></image>
+				<div>{{speedL}}</div>
+			</div>
+			<div class="iconbox_tiny r">
+				<image src="../../static/image/attribute/spd.png"></image>
+				<div>{{speedR}}</div>
+			</div>
+			<div class="dmginterval">
+				<div>总攻击间隔</div>
+				<center>
+					<span class="huati">{{myRound(attackInterval,100)}}</span>
+				</center>
+			</div>
+				
+		</uni-section>
+		
+		<uni-section title="实战伤害模拟" type="line" padding>
+			单次伤害期望值:
 			<br><br>
 			<center>
-				<span class="huati">D = ((X + Y%) - A%) - B%</span>
+				<span class="huati">{{myRound(attackDMG,10)}}</span>
 			</center>
-			<div class="huatiinfo">
-				<br>D - 最终造成的伤害
-				<br>X - 你的伤害值  
-				<br>Y - 你的凶猛度
-				<br>A - 目标防御比例（已减去穿透百分比）  
-				<br>B - 目标弹性
-				<br>注：此处的加减表示×(1±x%)
-			</div>
-		</div>
-	</uni-section>
-	
-	<uni-section title="基础伤害属性 (%)" type="line" style="" padding>
-		<div class="props"><image @click="show($event,-1)" src="../../static/image/dmg.png"></image>
-			<uni-number-box :value="dmg" @change="(v)=>{dmg=v}" :max="9999" :min="0" :step="0.1" /></div>
-		<div style="float: left;width: 100px;height: 30px;margin-bottom: 5px;"></div>
-		<div class="props"><image @click="show($event,0)" :src="iconURL(attrs[0])"></image>
-			<uni-number-box :value="acc" @change="(v)=>{acc=v}" :max="50" :min="-999" :step="0.1" /></div>
-		<div class="props"><image @click="show($event,1)" :src="iconURL(attrs[1])"></image>
-			<uni-number-box :value="pene" @change="(v)=>{pene=v}" :max="50" :step="0.1" /></div>
-		<div class="props"><image @click="show($event,2)" :src="iconURL(attrs[2])"></image>
-			<uni-number-box :value="crit" @change="(v)=>{crit=v}" :max="53" :min="0" :step="0.1"/></div>
-		<div class="props"><image @click="show($event,3)" :src="iconURL(attrs[3])"></image>
-			<uni-number-box :value="speed" @change="(v)=>{speed=v}" :max="70" :min="-999" :step="0.1" /></div>
-	</uni-section>
-	
-	<uni-section title="附加伤害属性 (%)" type="line" style="" padding>
-		<div class="props"><image @click="show($event,4)" :src="iconURL(attrs[4])"></image>
-			<uni-number-box :value="atk" @change="(v)=>{atk=v}" :max="100" :step="0.1" /></div>
-		<div class="props"><image @click="show($event,5)" :src="iconURL(attrs[5])"></image>
-			<uni-number-box :value="criteff" @change="(v)=>{criteff=v}" :max="150" :min="100" :step="0.1" /></div>
-		<div class="props"><image @click="show($event,6)" :src="iconURL(attrs[6])"></image>
-			<uni-number-box :value="pirck" @change="(v)=>{pirck=v}" :max="999" :step="0.1" /></div>
-		<div class="props"><image @click="show($event,7)" :src="iconURL(attrs[7])"></image>
-			<uni-number-box :value="fury" @change="(v)=>{fury=v}" :max="50" :step="0.1" /></div>
-		<div class="props"><image @click="show($event,8)" :src="iconURL(attrs[8])"></image>
-			<uni-number-box :value="rage" @change="(v)=>{rage=v}" :max="999" :step="0.1" /></div>
-	</uni-section>
-	
-	<uni-section title="目标防御属性" type="line" style="" padding>
-		<div class="def_data_box">
-			<div class="props"><image @click="show($event,9)" :src="iconURL(attrs[9])"></image>
-				<uni-number-box :value="defP" @change="(v)=>{defP=v}" :max="26000" /></div>
-			<div class="def_data">{{defphyPercent}}</div>
-		</div>
-		<div class="def_data_box">
-			<div class="props"><image @click="show($event,10)" :src="iconURL(attrs[10])"></image>
-				<uni-number-box :value="defM" @change="(v)=>{defM=v}" :max="26000" /></div>
-			<div class="def_data">{{defmagPercent}}</div>
-		</div>
-		<div class="props"><image @click="show($event,11)" :src="iconURL(attrs[11])"></image>
-			<uni-number-box :value="dodge" @change="(v)=>{dodge=v}" :max="60" :min="-20" :step="0.1" /></div>
-		<div class="props"><image @click="show($event,12)" :src="iconURL(attrs[12])"></image>
-			<uni-number-box :value="parry" @change="(v)=>{parry=v}" :max="30" :step="0.1" /></div>
-		<div class="props"><image @click="show($event,13)" :src="iconURL(attrs[13])"></image>
-			<uni-number-box :value="block" @change="(v)=>{block=v}" :max="25" :step="0.1" /></div>
-	</uni-section>
-	
-	<uni-section title="武器类型" type="line" style="" padding>
-		<div class="titlebox l">
-			<div class="subtitile">主手武器类型</div>
-			<uni-data-select
-				style="width:160px;"
-				v-model="weaponL"
-				:localdata="weaponLRange"
-				@change="(v)=>{
-					weaponL=v;
-					if(weaponL>4 && weaponR!=0) weaponR = 0;
-				}"
-				:clear="false">
-			</uni-data-select>
-		</div>
-		<div class="titlebox r">
-			<div class="subtitile">副手武器类型</div>
-			<uni-data-select
-				style="width:160px;"
-				v-model="weaponR"
-				:localdata="weaponRRange"
-				@change="(v)=>{weaponR=v;}"
-				:clear="false"
-				:disabled="(weaponL>4)?true:false">
-			</uni-data-select>
-		</div>
-		<div class="iconbox_tiny l">
-			<image src="../../static/image/attribute/spd.png"></image>
-			<div>{{speedL}}</div>
-		</div>
-		<div class="iconbox_tiny r">
-			<image src="../../static/image/attribute/spd.png"></image>
-			<div>{{speedR}}</div>
-		</div>
-		<div class="dmginterval">
-			<div>总攻击间隔</div>
+			每秒平a伤害期望值:
+			<br><br>
 			<center>
-				<span class="huati">{{myRound(attackInterval,100)}}</span>
+				<span class="huati">{{myRound(attackDMGperSec,10)}}</span>
 			</center>
-		</div>
-			
-	</uni-section>
-	
-	<uni-section title="实战伤害模拟" type="line" padding>
-		单次伤害期望值:
-		<br><br>
-		<center>
-			<span class="huati">{{myRound(attackDMG,10)}}</span>
-		</center>
-		每秒平a伤害期望值:
-		<br><br>
-		<center>
-			<span class="huati">{{myRound(attackDMGperSec,10)}}</span>
-		</center>
-		<div style="font-size: 12px;color: #4d4d4d;display: inline-block;margin-top: 20px;">
-			(平a或技能伤害，取决于设定攻击力)<br>
-			(把设定攻击力视为平a)
-		</div>
-	</uni-section>
-	
-	<AttriInfo ref="atrriinfo"></AttriInfo>
+			<div style="font-size: 12px;color: #4d4d4d;display: inline-block;margin-top: 20px;">
+				(平a或技能伤害，取决于设定攻击力)<br>
+				(把设定攻击力视为平a)
+			</div>
+		</uni-section>
 		
+		<AttriInfo ref="atrriinfo"></AttriInfo>
+	</div>
 </template>
 
 <script>
