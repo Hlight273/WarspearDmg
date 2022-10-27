@@ -108,6 +108,7 @@
 	}
 	.container {
 		width: 1110px;
+		padding-bottom: 60px;
 		margin: 0 auto;
 		overflow : hidden;
 	}
@@ -154,6 +155,10 @@
 		left: calc(50% - 108px);
 		text-align: center;
 		color: aliceblue;
+	}
+	.author {
+		margin-top: 40px;
+		overflow: hidden;
 	}
 	/* #endif */
 </style>

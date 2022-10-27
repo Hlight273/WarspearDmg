@@ -47,155 +47,6 @@ if (uni.restoreGlobal) {
 }
 (function(vue, shared) {
   "use strict";
-  var _export_sfc = (sfc, props) => {
-    const target = sfc.__vccOpts || sfc;
-    for (const [key, val] of props) {
-      target[key] = val;
-    }
-    return target;
-  };
-  const _sfc_main$d = {
-    name: "UniSection",
-    emits: ["click"],
-    props: {
-      type: {
-        type: String,
-        default: ""
-      },
-      title: {
-        type: String,
-        required: true,
-        default: ""
-      },
-      titleFontSize: {
-        type: String,
-        default: "14px"
-      },
-      titleColor: {
-        type: String,
-        default: "#333"
-      },
-      subTitle: {
-        type: String,
-        default: ""
-      },
-      subTitleFontSize: {
-        type: String,
-        default: "12px"
-      },
-      subTitleColor: {
-        type: String,
-        default: "#999"
-      },
-      padding: {
-        type: [Boolean, String],
-        default: false
-      }
-    },
-    computed: {
-      _padding() {
-        if (typeof this.padding === "string") {
-          return this.padding;
-        }
-        return this.padding ? "10px" : "";
-      }
-    },
-    watch: {
-      title(newVal) {
-        if (uni.report && newVal !== "") {
-          uni.report("title", newVal);
-        }
-      }
-    },
-    methods: {
-      onClick() {
-        this.$emit("click");
-      }
-    }
-  };
-  function _sfc_render$c(_ctx, _cache, $props, $setup, $data, $options) {
-    return vue.openBlock(), vue.createElementBlock("view", { class: "uni-section" }, [
-      vue.createElementVNode("view", {
-        class: "uni-section-header",
-        onClick: _cache[0] || (_cache[0] = (...args) => $options.onClick && $options.onClick(...args))
-      }, [
-        $props.type ? (vue.openBlock(), vue.createElementBlock("view", {
-          key: 0,
-          class: vue.normalizeClass(["uni-section-header__decoration", $props.type])
-        }, null, 2)) : vue.renderSlot(_ctx.$slots, "decoration", { key: 1 }, void 0, true),
-        vue.createElementVNode("view", { class: "uni-section-header__content" }, [
-          vue.createElementVNode("text", {
-            style: vue.normalizeStyle({ "font-size": $props.titleFontSize, "color": $props.titleColor }),
-            class: vue.normalizeClass(["uni-section__content-title", { "distraction": !$props.subTitle }])
-          }, vue.toDisplayString($props.title), 7),
-          $props.subTitle ? (vue.openBlock(), vue.createElementBlock("text", {
-            key: 0,
-            style: vue.normalizeStyle({ "font-size": $props.subTitleFontSize, "color": $props.subTitleColor }),
-            class: "uni-section-header__content-sub"
-          }, vue.toDisplayString($props.subTitle), 5)) : vue.createCommentVNode("v-if", true)
-        ]),
-        vue.createElementVNode("view", { class: "uni-section-header__slot-right" }, [
-          vue.renderSlot(_ctx.$slots, "right", {}, void 0, true)
-        ])
-      ]),
-      vue.createElementVNode("view", {
-        class: "uni-section-content",
-        style: vue.normalizeStyle({ padding: $options._padding })
-      }, [
-        vue.renderSlot(_ctx.$slots, "default", {}, void 0, true)
-      ], 4)
-    ]);
-  }
-  var __easycom_0$3 = /* @__PURE__ */ _export_sfc(_sfc_main$d, [["render", _sfc_render$c], ["__scopeId", "data-v-f7ca1098"], ["__file", "D:/Codes/\u6218\u77DB\u8BA1\u7B97\u5668\u9879\u76EEdemo/WarspearDmg/uni_modules/uni-section/components/uni-section/uni-section.vue"]]);
-  function isDebugMode() {
-    return typeof __channelId__ === "string" && __channelId__;
-  }
-  function jsonStringifyReplacer(k2, p2) {
-    switch (shared.toRawType(p2)) {
-      case "Function":
-        return "function() { [native code] }";
-      default:
-        return p2;
-    }
-  }
-  function normalizeLog(type, filename, args) {
-    if (isDebugMode()) {
-      args.push(filename.replace("at ", "uni-app:///"));
-      return console[type].apply(console, args);
-    }
-    const msgs = args.map(function(v2) {
-      const type2 = shared.toTypeString(v2).toLowerCase();
-      if (["[object object]", "[object array]", "[object module]"].indexOf(type2) !== -1) {
-        try {
-          v2 = "---BEGIN:JSON---" + JSON.stringify(v2, jsonStringifyReplacer) + "---END:JSON---";
-        } catch (e) {
-          v2 = type2;
-        }
-      } else {
-        if (v2 === null) {
-          v2 = "---NULL---";
-        } else if (v2 === void 0) {
-          v2 = "---UNDEFINED---";
-        } else {
-          const vType = shared.toRawType(v2).toUpperCase();
-          if (vType === "NUMBER" || vType === "BOOLEAN") {
-            v2 = "---BEGIN:" + vType + "---" + v2 + "---END:" + vType + "---";
-          } else {
-            v2 = String(v2);
-          }
-        }
-      }
-      return v2;
-    });
-    return msgs.join("---COMMA---") + " " + filename;
-  }
-  function formatAppLog(type, filename, ...args) {
-    const res = normalizeLog(type, filename, args);
-    res && console[type](res);
-  }
-  function resolveEasycom(component, easycom) {
-    return shared.isString(component) ? easycom : component;
-  }
   var icons = {
     "id": "2852637",
     "name": "uniui\u56FE\u6807\u5E93",
@@ -1367,11 +1218,18 @@ if (uni.restoreGlobal) {
       }
     ]
   };
+  var _export_sfc = (sfc, props) => {
+    const target = sfc.__vccOpts || sfc;
+    for (const [key, val] of props) {
+      target[key] = val;
+    }
+    return target;
+  };
   const getVal = (val) => {
     const reg = /^[0-9]*$/g;
     return typeof val === "number" || reg.test(val) ? val + "px" : val;
   };
-  const _sfc_main$c = {
+  const _sfc_main$f = {
     name: "UniIcons",
     emits: ["click"],
     props: {
@@ -1415,14 +1273,63 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$b(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$e(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("text", {
       style: vue.normalizeStyle({ color: $props.color, "font-size": $options.iconSize }),
       class: vue.normalizeClass(["uni-icons", ["uniui-" + $props.type, $props.customPrefix, $props.customPrefix ? $props.type : ""]]),
       onClick: _cache[0] || (_cache[0] = (...args) => $options._onClick && $options._onClick(...args))
     }, null, 6);
   }
-  var __easycom_0$2 = /* @__PURE__ */ _export_sfc(_sfc_main$c, [["render", _sfc_render$b], ["__scopeId", "data-v-a2e81f6e"], ["__file", "D:/Codes/\u6218\u77DB\u8BA1\u7B97\u5668\u9879\u76EEdemo/WarspearDmg/uni_modules/uni-icons/components/uni-icons/uni-icons.vue"]]);
+  var __easycom_0$4 = /* @__PURE__ */ _export_sfc(_sfc_main$f, [["render", _sfc_render$e], ["__scopeId", "data-v-a2e81f6e"], ["__file", "D:/Codes/\u6218\u77DB\u8BA1\u7B97\u5668\u9879\u76EEdemo/WarspearDmg/uni_modules/uni-icons/components/uni-icons/uni-icons.vue"]]);
+  function isDebugMode() {
+    return typeof __channelId__ === "string" && __channelId__;
+  }
+  function jsonStringifyReplacer(k2, p2) {
+    switch (shared.toRawType(p2)) {
+      case "Function":
+        return "function() { [native code] }";
+      default:
+        return p2;
+    }
+  }
+  function normalizeLog(type, filename, args) {
+    if (isDebugMode()) {
+      args.push(filename.replace("at ", "uni-app:///"));
+      return console[type].apply(console, args);
+    }
+    const msgs = args.map(function(v2) {
+      const type2 = shared.toTypeString(v2).toLowerCase();
+      if (["[object object]", "[object array]", "[object module]"].indexOf(type2) !== -1) {
+        try {
+          v2 = "---BEGIN:JSON---" + JSON.stringify(v2, jsonStringifyReplacer) + "---END:JSON---";
+        } catch (e) {
+          v2 = type2;
+        }
+      } else {
+        if (v2 === null) {
+          v2 = "---NULL---";
+        } else if (v2 === void 0) {
+          v2 = "---UNDEFINED---";
+        } else {
+          const vType = shared.toRawType(v2).toUpperCase();
+          if (vType === "NUMBER" || vType === "BOOLEAN") {
+            v2 = "---BEGIN:" + vType + "---" + v2 + "---END:" + vType + "---";
+          } else {
+            v2 = String(v2);
+          }
+        }
+      }
+      return v2;
+    });
+    return msgs.join("---COMMA---") + " " + filename;
+  }
+  function formatAppLog(type, filename, ...args) {
+    const res = normalizeLog(type, filename, args);
+    res && console[type](res);
+  }
+  function resolveEasycom(component, easycom) {
+    return shared.isString(component) ? easycom : component;
+  }
   class MPAnimation {
     constructor(options, _this) {
       this.options = options;
@@ -1532,7 +1439,7 @@ if (uni.restoreGlobal) {
     clearTimeout(_this.timer);
     return new MPAnimation(option, _this);
   }
-  const _sfc_main$b = {
+  const _sfc_main$e = {
     name: "uniTransition",
     emits: ["click", "change"],
     props: {
@@ -1757,7 +1664,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$a(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$d(_ctx, _cache, $props, $setup, $data, $options) {
     return $data.isShow ? (vue.openBlock(), vue.createElementBlock("view", {
       key: 0,
       ref: "ani",
@@ -1769,8 +1676,8 @@ if (uni.restoreGlobal) {
       vue.renderSlot(_ctx.$slots, "default")
     ], 14, ["animation"])) : vue.createCommentVNode("v-if", true);
   }
-  var __easycom_0$1 = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["render", _sfc_render$a], ["__file", "D:/Codes/\u6218\u77DB\u8BA1\u7B97\u5668\u9879\u76EEdemo/WarspearDmg/uni_modules/uni-transition/components/uni-transition/uni-transition.vue"]]);
-  const _sfc_main$a = {
+  var __easycom_0$3 = /* @__PURE__ */ _export_sfc(_sfc_main$e, [["render", _sfc_render$d], ["__file", "D:/Codes/\u6218\u77DB\u8BA1\u7B97\u5668\u9879\u76EEdemo/WarspearDmg/uni_modules/uni-transition/components/uni-transition/uni-transition.vue"]]);
+  const _sfc_main$d = {
     name: "uniPopup",
     components: {},
     emits: ["change", "maskClick"],
@@ -2067,8 +1974,8 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$9(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_uni_transition = resolveEasycom(vue.resolveDynamicComponent("uni-transition"), __easycom_0$1);
+  function _sfc_render$c(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_uni_transition = resolveEasycom(vue.resolveDynamicComponent("uni-transition"), __easycom_0$3);
     return $data.showPopup ? (vue.openBlock(), vue.createElementBlock("view", {
       key: 0,
       class: vue.normalizeClass(["uni-popup", [$data.popupstyle, $options.isDesktop ? "fixforpc-z-index" : ""]])
@@ -2108,8 +2015,8 @@ if (uni.restoreGlobal) {
       ], 32)
     ], 2)) : vue.createCommentVNode("v-if", true);
   }
-  var __easycom_1$1 = /* @__PURE__ */ _export_sfc(_sfc_main$a, [["render", _sfc_render$9], ["__scopeId", "data-v-7c43d41b"], ["__file", "D:/Codes/\u6218\u77DB\u8BA1\u7B97\u5668\u9879\u76EEdemo/WarspearDmg/uni_modules/uni-popup/components/uni-popup/uni-popup.vue"]]);
-  const _sfc_main$9 = {
+  var __easycom_0$2 = /* @__PURE__ */ _export_sfc(_sfc_main$d, [["render", _sfc_render$c], ["__scopeId", "data-v-7c43d41b"], ["__file", "D:/Codes/\u6218\u77DB\u8BA1\u7B97\u5668\u9879\u76EEdemo/WarspearDmg/uni_modules/uni-popup/components/uni-popup/uni-popup.vue"]]);
+  const _sfc_main$c = {
     data() {
       return {
         pageIndex: 1
@@ -2125,11 +2032,10 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$8(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$2);
-    const _component_ui = vue.resolveComponent("ui");
-    const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_1$1);
-    return vue.openBlock(), vue.createElementBlock(vue.Fragment, null, [
+  function _sfc_render$b(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
+    const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_0$2);
+    return vue.openBlock(), vue.createElementBlock("div", null, [
       vue.createElementVNode("div", {
         id: "bars",
         onClick: _cache[0] || (_cache[0] = (...args) => $options.open && $options.open(...args))
@@ -2153,66 +2059,63 @@ if (uni.restoreGlobal) {
               }),
               vue.createTextVNode("\u6218\u77DB\u8F85\u52A9\u5DE5\u5177")
             ]),
-            vue.createVNode(_component_ui, null, {
-              default: vue.withCtx(() => [
-                vue.createElementVNode("li", {
-                  class: "goto",
-                  onClick: _cache[1] || (_cache[1] = ($event) => $options.clickGoTo($event)),
-                  id: "1"
-                }, [
-                  vue.createVNode(_component_uni_icons, {
-                    type: "forward",
-                    size: "16",
-                    color: "dimgray"
-                  }),
-                  vue.createTextVNode("\u6218\u77DB\u4F24\u5BB3\u6A21\u62DF\u5668")
-                ]),
-                vue.createElementVNode("li", {
-                  class: "goto",
-                  onClick: _cache[2] || (_cache[2] = ($event) => $options.clickGoTo($event)),
-                  id: "2"
-                }, [
-                  vue.createVNode(_component_uni_icons, {
-                    type: "forward",
-                    size: "16",
-                    color: "dimgray"
-                  }),
-                  vue.createTextVNode("\u6218\u77DB\u4F24\u5BB3\u516C\u5F0F\u539F\u7406")
-                ]),
-                vue.createElementVNode("li", {
-                  class: "goto",
-                  onClick: _cache[3] || (_cache[3] = ($event) => $options.clickGoTo($event)),
-                  id: "3"
-                }, [
-                  vue.createVNode(_component_uni_icons, {
-                    type: "forward",
-                    size: "16",
-                    color: "dimgray"
-                  }),
-                  vue.createTextVNode("\u6218\u77DB\u5C0F\u77E5\u8BC61")
-                ]),
-                vue.createElementVNode("li", {
-                  class: "goto",
-                  onClick: _cache[4] || (_cache[4] = ($event) => $options.clickGoTo($event)),
-                  id: "4"
-                }, [
-                  vue.createVNode(_component_uni_icons, {
-                    type: "forward",
-                    size: "16",
-                    color: "dimgray"
-                  }),
-                  vue.createTextVNode("\u6218\u77DB\u5C0F\u77E5\u8BC62")
-                ])
+            vue.createElementVNode("ul", null, [
+              vue.createElementVNode("li", {
+                class: "goto",
+                onClick: _cache[1] || (_cache[1] = ($event) => $options.clickGoTo($event)),
+                id: "1"
+              }, [
+                vue.createVNode(_component_uni_icons, {
+                  type: "forward",
+                  size: "16",
+                  color: "dimgray"
+                }),
+                vue.createTextVNode("\u6218\u77DB\u4F24\u5BB3\u6A21\u62DF\u5668")
               ]),
-              _: 1
-            })
+              vue.createElementVNode("li", {
+                class: "goto",
+                onClick: _cache[2] || (_cache[2] = ($event) => $options.clickGoTo($event)),
+                id: "2"
+              }, [
+                vue.createVNode(_component_uni_icons, {
+                  type: "forward",
+                  size: "16",
+                  color: "dimgray"
+                }),
+                vue.createTextVNode("\u6218\u77DB\u4F24\u5BB3\u516C\u5F0F\u539F\u7406")
+              ]),
+              vue.createElementVNode("li", {
+                class: "goto",
+                onClick: _cache[3] || (_cache[3] = ($event) => $options.clickGoTo($event)),
+                id: "3"
+              }, [
+                vue.createVNode(_component_uni_icons, {
+                  type: "forward",
+                  size: "16",
+                  color: "dimgray"
+                }),
+                vue.createTextVNode("\u6218\u77DB\u5C0F\u77E5\u8BC61")
+              ]),
+              vue.createElementVNode("li", {
+                class: "goto",
+                onClick: _cache[4] || (_cache[4] = ($event) => $options.clickGoTo($event)),
+                id: "4"
+              }, [
+                vue.createVNode(_component_uni_icons, {
+                  type: "forward",
+                  size: "16",
+                  color: "dimgray"
+                }),
+                vue.createTextVNode("\u6218\u77DB\u5C0F\u77E5\u8BC62")
+              ])
+            ])
           ])
         ]),
         _: 1
       }, 512)
-    ], 64);
+    ]);
   }
-  var Switcher = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["render", _sfc_render$8], ["__scopeId", "data-v-1b6fdd37"], ["__file", "D:/Codes/\u6218\u77DB\u8BA1\u7B97\u5668\u9879\u76EEdemo/WarspearDmg/pages/index/switcher.vue"]]);
+  var Switcher = /* @__PURE__ */ _export_sfc(_sfc_main$c, [["render", _sfc_render$b], ["__scopeId", "data-v-1b6fdd37"], ["__file", "D:/Codes/\u6218\u77DB\u8BA1\u7B97\u5668\u9879\u76EEdemo/WarspearDmg/pages/index/switcher.vue"]]);
   function obj2strClass(obj) {
     let classess = "";
     for (let key in obj) {
@@ -2231,7 +2134,7 @@ if (uni.restoreGlobal) {
     }
     return style;
   }
-  const _sfc_main$8 = {
+  const _sfc_main$b = {
     name: "uni-easyinput",
     emits: ["click", "iconClick", "update:modelValue", "input", "focus", "blur", "confirm", "clear", "eyes", "change"],
     model: {
@@ -2500,8 +2403,8 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$7(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$2);
+  function _sfc_render$a(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", {
       class: vue.normalizeClass(["uni-easyinput", { "uni-easyinput-error": $options.msg }]),
       style: vue.normalizeStyle($options.boxStyle)
@@ -2587,8 +2490,8 @@ if (uni.restoreGlobal) {
       ], 6)
     ], 6);
   }
-  var __easycom_0 = /* @__PURE__ */ _export_sfc(_sfc_main$8, [["render", _sfc_render$7], ["__scopeId", "data-v-abe12412"], ["__file", "D:/Codes/\u6218\u77DB\u8BA1\u7B97\u5668\u9879\u76EEdemo/WarspearDmg/uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput.vue"]]);
-  const _sfc_main$7 = {
+  var __easycom_0$1 = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["render", _sfc_render$a], ["__scopeId", "data-v-abe12412"], ["__file", "D:/Codes/\u6218\u77DB\u8BA1\u7B97\u5668\u9879\u76EEdemo/WarspearDmg/uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput.vue"]]);
+  const _sfc_main$a = {
     name: "UniNumberBox",
     emits: ["change", "input", "update:modelValue", "blur", "focus"],
     props: {
@@ -2708,7 +2611,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$9(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "uni-numbox" }, [
       vue.createElementVNode("view", {
         onClick: _cache[0] || (_cache[0] = ($event) => $options._calcValue("minus")),
@@ -2743,7 +2646,100 @@ if (uni.restoreGlobal) {
       ], 4)
     ]);
   }
-  var __easycom_1 = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["render", _sfc_render$6], ["__scopeId", "data-v-dd94a2a8"], ["__file", "D:/Codes/\u6218\u77DB\u8BA1\u7B97\u5668\u9879\u76EEdemo/WarspearDmg/uni_modules/uni-number-box/components/uni-number-box/uni-number-box.vue"]]);
+  var __easycom_1 = /* @__PURE__ */ _export_sfc(_sfc_main$a, [["render", _sfc_render$9], ["__scopeId", "data-v-dd94a2a8"], ["__file", "D:/Codes/\u6218\u77DB\u8BA1\u7B97\u5668\u9879\u76EEdemo/WarspearDmg/uni_modules/uni-number-box/components/uni-number-box/uni-number-box.vue"]]);
+  const _sfc_main$9 = {
+    name: "UniSection",
+    emits: ["click"],
+    props: {
+      type: {
+        type: String,
+        default: ""
+      },
+      title: {
+        type: String,
+        required: true,
+        default: ""
+      },
+      titleFontSize: {
+        type: String,
+        default: "14px"
+      },
+      titleColor: {
+        type: String,
+        default: "#333"
+      },
+      subTitle: {
+        type: String,
+        default: ""
+      },
+      subTitleFontSize: {
+        type: String,
+        default: "12px"
+      },
+      subTitleColor: {
+        type: String,
+        default: "#999"
+      },
+      padding: {
+        type: [Boolean, String],
+        default: false
+      }
+    },
+    computed: {
+      _padding() {
+        if (typeof this.padding === "string") {
+          return this.padding;
+        }
+        return this.padding ? "10px" : "";
+      }
+    },
+    watch: {
+      title(newVal) {
+        if (uni.report && newVal !== "") {
+          uni.report("title", newVal);
+        }
+      }
+    },
+    methods: {
+      onClick() {
+        this.$emit("click");
+      }
+    }
+  };
+  function _sfc_render$8(_ctx, _cache, $props, $setup, $data, $options) {
+    return vue.openBlock(), vue.createElementBlock("view", { class: "uni-section" }, [
+      vue.createElementVNode("view", {
+        class: "uni-section-header",
+        onClick: _cache[0] || (_cache[0] = (...args) => $options.onClick && $options.onClick(...args))
+      }, [
+        $props.type ? (vue.openBlock(), vue.createElementBlock("view", {
+          key: 0,
+          class: vue.normalizeClass(["uni-section-header__decoration", $props.type])
+        }, null, 2)) : vue.renderSlot(_ctx.$slots, "decoration", { key: 1 }, void 0, true),
+        vue.createElementVNode("view", { class: "uni-section-header__content" }, [
+          vue.createElementVNode("text", {
+            style: vue.normalizeStyle({ "font-size": $props.titleFontSize, "color": $props.titleColor }),
+            class: vue.normalizeClass(["uni-section__content-title", { "distraction": !$props.subTitle }])
+          }, vue.toDisplayString($props.title), 7),
+          $props.subTitle ? (vue.openBlock(), vue.createElementBlock("text", {
+            key: 0,
+            style: vue.normalizeStyle({ "font-size": $props.subTitleFontSize, "color": $props.subTitleColor }),
+            class: "uni-section-header__content-sub"
+          }, vue.toDisplayString($props.subTitle), 5)) : vue.createCommentVNode("v-if", true)
+        ]),
+        vue.createElementVNode("view", { class: "uni-section-header__slot-right" }, [
+          vue.renderSlot(_ctx.$slots, "right", {}, void 0, true)
+        ])
+      ]),
+      vue.createElementVNode("view", {
+        class: "uni-section-content",
+        style: vue.normalizeStyle({ padding: $options._padding })
+      }, [
+        vue.renderSlot(_ctx.$slots, "default", {}, void 0, true)
+      ], 4)
+    ]);
+  }
+  var __easycom_0 = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["render", _sfc_render$8], ["__scopeId", "data-v-f7ca1098"], ["__file", "D:/Codes/\u6218\u77DB\u8BA1\u7B97\u5668\u9879\u76EEdemo/WarspearDmg/uni_modules/uni-section/components/uni-section/uni-section.vue"]]);
   const isObject = (val) => val !== null && typeof val === "object";
   const defaultDelimiters = ["{", "}"];
   class BaseFormatter {
@@ -3037,6 +3033,13 @@ if (uni.restoreGlobal) {
         navigationBarTitleText: "",
         enablePullDownRefresh: false
       }
+    },
+    {
+      path: "pages/index/attriInfo",
+      style: {
+        navigationBarTitleText: "",
+        enablePullDownRefresh: false
+      }
     }
   ];
   const globalStyle = {
@@ -3290,7 +3293,7 @@ if (uni.restoreGlobal) {
     default:
       g = f;
   }
-  const p = h({}.UNICLOUD_DEBUG), m = h("[]");
+  const p = h('{\n    "address": [\n        "127.0.0.1",\n        "192.168.1.238"\n    ],\n    "debugPort": 53370,\n    "initialLaunchType": "local",\n    "servePort": 53371,\n    "skipFiles": [\n        "<node_internals>/**/*.js",\n        "D:/DevelopApps/HBuilderX/plugins/unicloud/**/*.js"\n    ]\n}\n'), m = h('[{"provider":"aliyun","spaceName":"hlight-warspear","spaceId":"b56e0b1b-7c4b-4f3a-9f5d-7de14a1d92ac","clientSecret":"bbqAZmIhEOn9PVhbKEUeWg==","endpoint":"https://api.bspapp.com"}]');
   let _ = "";
   try {
     _ = "__UNI__EDA0625";
@@ -5217,7 +5220,7 @@ if (uni.restoreGlobal) {
     }
   })();
   var rn = on;
-  const _sfc_main$6 = {
+  const _sfc_main$8 = {
     name: "uni-stat-select",
     mixins: [rn.mixinDatacom || {}],
     data() {
@@ -5381,8 +5384,8 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$2);
+  function _sfc_render$7(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "uni-stat__select" }, [
       $props.label ? (vue.openBlock(), vue.createElementBlock("span", {
         key: 0,
@@ -5454,7 +5457,7 @@ if (uni.restoreGlobal) {
       ], 2)
     ]);
   }
-  var __easycom_3 = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["render", _sfc_render$5], ["__scopeId", "data-v-6b64008e"], ["__file", "D:/Codes/\u6218\u77DB\u8BA1\u7B97\u5668\u9879\u76EEdemo/WarspearDmg/uni_modules/uni-data-select/components/uni-data-select/uni-data-select.vue"]]);
+  var __easycom_2 = /* @__PURE__ */ _export_sfc(_sfc_main$8, [["render", _sfc_render$7], ["__scopeId", "data-v-6b64008e"], ["__file", "D:/Codes/\u6218\u77DB\u8BA1\u7B97\u5668\u9879\u76EEdemo/WarspearDmg/uni_modules/uni-data-select/components/uni-data-select/uni-data-select.vue"]]);
   var en = {
     "uni-fav.collect": "collect",
     "uni-fav.collected": "collected"
@@ -5473,7 +5476,7 @@ if (uni.restoreGlobal) {
     "zh-Hant": zhHant
   };
   const { t } = initVueI18n(messages);
-  const _sfc_main$5 = {
+  const _sfc_main$7 = {
     name: "UniFav",
     emits: ["click"],
     props: {
@@ -5544,8 +5547,8 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$4(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$2);
+  function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", {
       class: vue.normalizeClass([[$props.circle === true || $props.circle === "true" ? "uni-fav--circle" : ""], "uni-fav"]),
       style: vue.normalizeStyle([{ backgroundColor: $props.checked ? $props.bgColorChecked : $props.bgColor }]),
@@ -5565,8 +5568,8 @@ if (uni.restoreGlobal) {
       }, vue.toDisplayString($props.checked ? $options.contentFav : $options.contentDefault), 5)
     ], 6);
   }
-  var __easycom_4 = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["render", _sfc_render$4], ["__scopeId", "data-v-77148eac"], ["__file", "D:/Codes/\u6218\u77DB\u8BA1\u7B97\u5668\u9879\u76EEdemo/WarspearDmg/uni_modules/uni-fav/components/uni-fav/uni-fav.vue"]]);
-  const _sfc_main$4 = {
+  var __easycom_4 = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["render", _sfc_render$6], ["__scopeId", "data-v-77148eac"], ["__file", "D:/Codes/\u6218\u77DB\u8BA1\u7B97\u5668\u9879\u76EEdemo/WarspearDmg/uni_modules/uni-fav/components/uni-fav/uni-fav.vue"]]);
+  const _sfc_main$6 = {
     name: "UniTag",
     emits: ["click"],
     props: {
@@ -5638,7 +5641,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
     return $props.text ? (vue.openBlock(), vue.createElementBlock("text", {
       key: 0,
       class: vue.normalizeClass(["uni-tag", $options.classes]),
@@ -5646,8 +5649,8 @@ if (uni.restoreGlobal) {
       onClick: _cache[0] || (_cache[0] = (...args) => $options.onClick && $options.onClick(...args))
     }, vue.toDisplayString($props.text), 7)) : vue.createCommentVNode("v-if", true);
   }
-  var __easycom_5 = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["render", _sfc_render$3], ["__scopeId", "data-v-1516016e"], ["__file", "D:/Codes/\u6218\u77DB\u8BA1\u7B97\u5668\u9879\u76EEdemo/WarspearDmg/uni_modules/uni-tag/components/uni-tag/uni-tag.vue"]]);
-  const _sfc_main$3 = {
+  var __easycom_5 = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["render", _sfc_render$5], ["__scopeId", "data-v-1516016e"], ["__file", "D:/Codes/\u6218\u77DB\u8BA1\u7B97\u5668\u9879\u76EEdemo/WarspearDmg/uni_modules/uni-tag/components/uni-tag/uni-tag.vue"]]);
+  const _sfc_main$5 = {
     data() {
       return {
         JResult: [
@@ -5656,6 +5659,9 @@ if (uni.restoreGlobal) {
           { dmgAP1: 0 },
           { dmgAP2: 0 }
         ],
+        clotheDmg: 0,
+        beltDmg: 0,
+        gloveDmg: 0,
         vCape: 0,
         RangeCape: [
           { value: 0, text: "\u65E0", dmg1: 0, dmg2: 0, isMagic: false },
@@ -5718,6 +5724,8 @@ if (uni.restoreGlobal) {
         for (let i2 = 0; i2 < dataAll.length; i2++) {
           this.addData(dataAll[i2]);
         }
+        let dmgClothes = 0 + this.beltDmg * 1 + this.gloveDmg * 1 + this.clotheDmg * 1;
+        this.JResult[3].dmgAP2 += dmgClothes * 1;
         this.$emit("jeweChanged", this.JResult);
       },
       addData(dataJewelry) {
@@ -5750,15 +5758,28 @@ if (uni.restoreGlobal) {
       change4(e) {
         this.vRing2 = e;
         this.changeData();
+      },
+      change5(e) {
+        this.clotheDmg = e;
+        this.changeData();
+      },
+      change6(e) {
+        this.beltDmg = e;
+        this.changeData();
+      },
+      change7(e) {
+        this.gloveDmg = e;
+        this.changeData();
       }
     }
   };
-  function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_uni_data_select = resolveEasycom(vue.resolveDynamicComponent("uni-data-select"), __easycom_3);
-    const _component_uni_section = resolveEasycom(vue.resolveDynamicComponent("uni-section"), __easycom_0$3);
+  function _sfc_render$4(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_uni_data_select = resolveEasycom(vue.resolveDynamicComponent("uni-data-select"), __easycom_2);
+    const _component_uni_easyinput = resolveEasycom(vue.resolveDynamicComponent("uni-easyinput"), __easycom_0$1);
+    const _component_uni_section = resolveEasycom(vue.resolveDynamicComponent("uni-section"), __easycom_0);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createVNode(_component_uni_section, {
-        title: "\u9970\u54C1\u4F24\u5BB3",
+        title: "\u88C5\u5907&\u9970\u54C1\u4F24\u5BB3",
         type: "line",
         padding: ""
       }, {
@@ -5809,15 +5830,50 @@ if (uni.restoreGlobal) {
               clear: false
             }, null, 8, ["modelValue", "localdata", "onChange"])
           ]),
+          vue.createElementVNode("div", { style: { "height": "120upx" } }),
+          vue.createElementVNode("div", { class: "titlebox l" }, [
+            vue.createElementVNode("div", { class: "subtitile" }, "\u8863\u670D\u6CD5\u5F3A"),
+            vue.createVNode(_component_uni_easyinput, {
+              modelValue: $data.clotheDmg,
+              "onUpdate:modelValue": _cache[4] || (_cache[4] = ($event) => $data.clotheDmg = $event),
+              class: "clothe_inputbox",
+              onChange: $options.change5,
+              clearable: false,
+              type: "Number"
+            }, null, 8, ["modelValue", "onChange"])
+          ]),
+          vue.createElementVNode("div", { class: "titlebox l" }, [
+            vue.createElementVNode("div", { class: "subtitile" }, "\u8170\u5E26\u6CD5\u5F3A"),
+            vue.createVNode(_component_uni_easyinput, {
+              modelValue: $data.beltDmg,
+              "onUpdate:modelValue": _cache[5] || (_cache[5] = ($event) => $data.beltDmg = $event),
+              class: "clothe_inputbox",
+              onChange: $options.change6,
+              clearable: false,
+              type: "Number"
+            }, null, 8, ["modelValue", "onChange"])
+          ]),
+          vue.createElementVNode("div", { class: "titlebox l" }, [
+            vue.createElementVNode("div", { class: "subtitile" }, "\u624B\u5957\u6CD5\u5F3A"),
+            vue.createVNode(_component_uni_easyinput, {
+              modelValue: $data.gloveDmg,
+              "onUpdate:modelValue": _cache[6] || (_cache[6] = ($event) => $data.gloveDmg = $event),
+              class: "clothe_inputbox",
+              style: { "margin-right": "0" },
+              onChange: $options.change7,
+              clearable: false,
+              type: "Number"
+            }, null, 8, ["modelValue", "onChange"])
+          ]),
           vue.createCommentVNode(" <br>\r\n			<br>\r\n			<div>{{JResult[0].dmgAD1}}</div>\r\n			<div>{{JResult[1].dmgAD2}}</div>\r\n			<div>{{JResult[2].dmgAP1}}</div>\r\n			<div>{{JResult[3].dmgAP2}}</div>\r\n			 "),
-          vue.createElementVNode("div", { style: { "height": "80upx" } })
+          vue.createElementVNode("div", { style: { "height": "160upx" } })
         ]),
         _: 1
       })
     ]);
   }
-  var Jewelry = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["render", _sfc_render$2], ["__scopeId", "data-v-6214fb64"], ["__file", "D:/Codes/\u6218\u77DB\u8BA1\u7B97\u5668\u9879\u76EEdemo/WarspearDmg/pages/index/jewelry.vue"]]);
-  const _sfc_main$2 = {
+  var Jewelry = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["render", _sfc_render$4], ["__scopeId", "data-v-6214fb64"], ["__file", "D:/Codes/\u6218\u77DB\u8BA1\u7B97\u5668\u9879\u76EEdemo/WarspearDmg/pages/index/jewelry.vue"]]);
+  const _sfc_main$4 = {
     data() {
       return {
         TextTrue: {
@@ -5978,15 +6034,15 @@ if (uni.restoreGlobal) {
       Jewelry
     }
   };
-  function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_uni_easyinput = resolveEasycom(vue.resolveDynamicComponent("uni-easyinput"), __easycom_0);
+  function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_uni_easyinput = resolveEasycom(vue.resolveDynamicComponent("uni-easyinput"), __easycom_0$1);
     const _component_uni_number_box = resolveEasycom(vue.resolveDynamicComponent("uni-number-box"), __easycom_1);
-    const _component_uni_section = resolveEasycom(vue.resolveDynamicComponent("uni-section"), __easycom_0$3);
+    const _component_uni_section = resolveEasycom(vue.resolveDynamicComponent("uni-section"), __easycom_0);
     const _component_jewelry = vue.resolveComponent("jewelry");
-    const _component_uni_data_select = resolveEasycom(vue.resolveDynamicComponent("uni-data-select"), __easycom_3);
+    const _component_uni_data_select = resolveEasycom(vue.resolveDynamicComponent("uni-data-select"), __easycom_2);
     const _component_uni_fav = resolveEasycom(vue.resolveDynamicComponent("uni-fav"), __easycom_4);
     const _component_uni_tag = resolveEasycom(vue.resolveDynamicComponent("uni-tag"), __easycom_5);
-    return vue.openBlock(), vue.createElementBlock(vue.Fragment, null, [
+    return vue.openBlock(), vue.createElementBlock("div", null, [
       vue.createElementVNode("div", { id: "calc_box" }, [
         vue.createVNode(_component_uni_section, {
           title: "\u57FA\u7840\u4F24\u5BB3",
@@ -6190,10 +6246,11 @@ if (uni.restoreGlobal) {
                 vue.createVNode(_component_uni_easyinput, {
                   modelValue: $data.dmgOther1,
                   "onUpdate:modelValue": _cache[10] || (_cache[10] = ($event) => $data.dmgOther1 = $event),
+                  type: "Number",
                   placeholder: "%",
                   style: { "float": "right", "width": "127px", "margin-right": "38px" }
                 }, null, 8, ["modelValue"]),
-                vue.createCommentVNode(' <uni-easyinput v-model="dmgOther2" placeholder=""  style="float: left;width: 70px;margin-right: 75upx;">\r\n					</uni-easyinput> ')
+                vue.createCommentVNode(' <uni-easyinput v-model="dmgOther2" placeholder=""  style="float: left;width: 70px;margin-right: 75upx;">\r\n						</uni-easyinput> ')
               ])
             ]),
             vue.createElementVNode("div", { style: { "height": "80upx" } })
@@ -6224,9 +6281,705 @@ if (uni.restoreGlobal) {
         ]),
         _: 1
       })
-    ], 64);
+    ]);
   }
-  var PagesIndexCalc = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["render", _sfc_render$1], ["__file", "D:/Codes/\u6218\u77DB\u8BA1\u7B97\u5668\u9879\u76EEdemo/WarspearDmg/pages/index/calc.vue"]]);
+  var PagesIndexCalc = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["render", _sfc_render$3], ["__file", "D:/Codes/\u6218\u77DB\u8BA1\u7B97\u5668\u9879\u76EEdemo/WarspearDmg/pages/index/calc.vue"]]);
+  const _sfc_main$3 = {
+    data() {
+      return {
+        aID: 0,
+        hiIMG: "",
+        hiAttiName: "",
+        attrs: [
+          "acc",
+          "pene",
+          "crit",
+          "speed",
+          "attackStrength",
+          "superdmg",
+          "piericing",
+          "depthFury",
+          "rage",
+          "defPhysic",
+          "defMagic",
+          "dodge",
+          "parry",
+          "block"
+        ],
+        attrs_ZH: [
+          "\u7CBE\u51C6",
+          "\u7A7F\u900F",
+          "\u66B4\u51FB",
+          "\u653B\u901F",
+          "\u653B\u5F3A",
+          "\u66B4\u4F24",
+          "\u7A7F\u523A",
+          "\u9C7C\u53C9",
+          "\u8086\u8650",
+          "\u7269\u9632",
+          "\u9B54\u9632",
+          "\u95EA\u907F",
+          "\u62DB\u67B6",
+          "\u683C\u6321"
+        ]
+      };
+    },
+    methods: {
+      changeAttri(value) {
+        this.pene = value;
+      },
+      hi(e, id) {
+        this.aID = id;
+        this.hiIMG = this.iconURL(this.attrs[id]);
+        this.hiAttiName = this.attrs_ZH[id];
+        if (this.aID == -1) {
+          this.hiIMG = "../../static/image/attribute/dmg.png";
+          this.hiAttiName = "\u653B\u51FB\u529B";
+        }
+        this.$refs.popup.open("center");
+      },
+      closePopup() {
+        this.$refs.popup.close();
+      },
+      iconURL(name) {
+        return "../../static/image/attribute/" + name + ".webp";
+      }
+    }
+  };
+  function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_0$2);
+    return vue.openBlock(), vue.createBlock(_component_uni_popup, {
+      ref: "popup",
+      type: "center"
+    }, {
+      default: vue.withCtx(() => [
+        vue.createElementVNode("div", {
+          class: "helpbox",
+          onClick: _cache[0] || (_cache[0] = (...args) => $options.closePopup && $options.closePopup(...args))
+        }, [
+          vue.createElementVNode("image", {
+            src: "/static/image/attribute/wsBorder.png",
+            class: "helpbox_iconborder"
+          }),
+          vue.createElementVNode("image", {
+            src: $data.hiIMG,
+            class: "helpbox_icon"
+          }, null, 8, ["src"]),
+          vue.createElementVNode("h2", null, vue.toDisplayString($data.hiAttiName), 1),
+          $data.aID == -1 ? (vue.openBlock(), vue.createElementBlock("div", {
+            key: 0,
+            class: "introduce"
+          }, [
+            vue.createElementVNode("h4", null, "\u4E00\u6B21\u653B\u51FB\u9020\u6210\u7684\u4F24\u5BB3\uFF1A"),
+            vue.createElementVNode("p", null, [
+              vue.createTextVNode(" \u5F88\u663E\u7136\uFF0C\u8FD9\u4E00\u6B21\u653B\u51FB\u53EF\u4EE5\u662F\u5E73a\u4F24\u5BB3\uFF0C\u4E5F\u53EF\u4EE5\u662F\u5355\u6B21\u6280\u80FD\u4F24\u5BB3"),
+              vue.createElementVNode("br"),
+              vue.createTextVNode(" \u4F5C\u4E3A\u5E73a\uFF0C\u60A8\u4EC5\u9700\u8981\u8003\u8651\u9762\u677F\u503C"),
+              vue.createElementVNode("br"),
+              vue.createTextVNode(" \u4F5C\u4E3A\u6280\u80FD\u4F24\u5BB3\uFF0C\u60A8\u9700\u8981\u8003\u8651\u60A8\u7684\u6280\u80FD\u4F24\u5BB3\u52A0\u6210\u3001\u4EE5\u53CA\u5404\u79CD\u624D\u80FD\u548C\u5176\u4ED6\u6280\u80FD\u7684\u989D\u5916\u52A0\u6210\u3001 \u6280\u80FD\u4F24\u5BB3\u5F71\u54CD\u56E0\u7D20\u6709\u5F88\u591A\uFF0C\u5BB9\u6613\u548C\u60A8\u7684\u9884\u671F\u4E0D\u7B26 ")
+            ])
+          ])) : vue.createCommentVNode("v-if", true),
+          $data.aID == 0 ? (vue.openBlock(), vue.createElementBlock("div", {
+            key: 1,
+            class: "introduce"
+          }, [
+            vue.createElementVNode("h4", null, "\u7CBE\u51C6\u4E00\u6BD4\u4E00\u7684\u62B5\u6D88\u95EA\u907F\u503C\uFF1A"),
+            vue.createElementVNode("p", null, [
+              vue.createTextVNode(" \u6BD4\u5982\u60A8\u7684\u7CBE\u51C6\u503C\u662F30%\uFF0C\u654C\u4EBA\u7684\u95EA\u907F\u662F60% "),
+              vue.createElementVNode("br"),
+              vue.createTextVNode(" \u90A3\u4E48\u60A8\u5BF9\u654C\u4EBA\u7684 \u5B9E\u9645\u547D\u4E2D\u7387 = (100%+\u7CBE\u51C6-\u95EA\u907F) = 70% ")
+            ]),
+            vue.createElementVNode("h4", null, "\u7CBE\u51C6\u7684\u5E94\u7528\u573A\u666F\uFF1A"),
+            vue.createElementVNode("p", null, [
+              vue.createTextVNode(" \u5728pve\u4E2D\uFF0C35\u5DE6\u53F3\u7684\u7CBE\u51C6\u5C31\u5F88\u5C11\u4F1A\u51FA\u73B0\u95EA\u907F\u4E86\u3002"),
+              vue.createElementVNode("br"),
+              vue.createTextVNode(" \u800C\u5728pvp\u4E2D\uFF0C\u6709\u7684\u6280\u80FD\u53EF\u4EE5\u51CF\u5C11\u60A8\u7684\u7CBE\u51C6\uFF0C\u56E0\u6B64\u60A8\u4F1A\u9047\u5230\u8BB8\u591A\u95EA\u907F\u3002 ")
+            ])
+          ])) : vue.createCommentVNode("v-if", true),
+          $data.aID == 1 ? (vue.openBlock(), vue.createElementBlock("div", {
+            key: 2,
+            class: "introduce"
+          }, [
+            vue.createElementVNode("h4", null, "\u7A7F\u900F\u4E00\u6BD4\u4E00\u7684\u62B5\u6D88\u9632\u5FA1\u767E\u5206\u6BD4\u503C\uFF1A"),
+            vue.createElementVNode("p", null, [
+              vue.createTextVNode(" \u6BD4\u5982\u60A8\u7684\u7A7F\u900F\u503C\u662F30%\uFF0C\u654C\u4EBA\u7684\u7269\u7406\u9632\u5FA1\u662F6500(50%)"),
+              vue.createElementVNode("br"),
+              vue.createTextVNode(" \u90A3\u4E48\u60A8\u5BF9\u654C\u4EBA\u7684 \u5B9E\u9645\u4F24\u5BB3\u7ED3\u7B97 \u53EA\u4F1A\u6263\u966420% ")
+            ]),
+            vue.createElementVNode("h4", null, "\u9510\u8BC4\u7A7F\u900F\uFF1A"),
+            vue.createElementVNode("p", null, " \u5728\u7EDD\u5927\u591A\u6570\u60C5\u51B5\uFF0C\u654C\u4EBA\u7684\u9632\u5FA1\u90FD\u4F1A\u6BD430%\u4E43\u81F350%\u66F4\u591A\uFF0C \u56E0\u6B64\u7A7F\u900F=\u589E\u4F24\u3002\u663E\u7136\uFF0C\u8FD9\u662F\u4E00\u4E2Apvppve\u90FD\u5F88\u91CD\u8981\u7684\u5C5E\u6027\u3002 ")
+          ])) : vue.createCommentVNode("v-if", true),
+          $data.aID == 2 ? (vue.openBlock(), vue.createElementBlock("div", {
+            key: 3,
+            class: "introduce"
+          }, [
+            vue.createElementVNode("h4", null, "\u66B4\u51FB\u7387\u662Fpve\u6536\u76CA\u6700\u9AD8\u7684\u5C5E\u6027\uFF01"),
+            vue.createElementVNode("h4", null, "\u66B4\u51FB\u7387\u589E\u52A0\u9020\u6210\u66B4\u51FB\u4F24\u5BB3 \u6216 \u66B4\u51FB\u6CBB\u7597 \u7684\u6982\u7387\uFF1A"),
+            vue.createElementVNode("p", null, [
+              vue.createTextVNode(" \u66B4\u51FB\u9020\u6210\u4F24\u5BB3 = \u539F\u4F24\u5BB3 * 2 * \u66B4\u4F24\u503C"),
+              vue.createElementVNode("br"),
+              vue.createTextVNode(" \u503C\u5F97\u6CE8\u610F\u7684\u662F\uFF0C\u66B4\u51FB\u5976\u4E0D\u4F1A\u6536\u5230\u66B4\u4F24\u52A0\u6210 ")
+            ]),
+            vue.createElementVNode("h4", null, "\u66B4\u51FB\u7387\uFF1A"),
+            vue.createElementVNode("p", null, [
+              vue.createTextVNode(" \u5728\u4F60\u7684\u624D\u80FD\u754C\u9762\u53EF\u4EE5\u989D\u5916\u589E\u52A03%\u7684\u66B4\u51FB\u7387\u4E0A\u9650\u3002 "),
+              vue.createElementVNode("br"),
+              vue.createTextVNode(" \u7A33\u56FA\u503C\u53EF\u4EE5\u964D\u4F4E\u654C\u4EBA\u6536\u5230\u7684\u66B4\u51FB\u7387\u548C\u66B4\u51FB\u4F24\u5BB3\u3002"),
+              vue.createElementVNode("br"),
+              vue.createTextVNode(" \u5F39\u6027\u503C\u53EF\u4EE5\u964D\u4F4E\u4F60\u7684\u66B4\u51FB\u7387\uFF0C\u6218\u77DB\u7684\u7279\u6027\u4F1A\u8BA9\u66B4\u51FB\u6548\u679C\u5728pvp\u65F6\u8D77\u5230\u8D1F\u9762\u5F71\u54CD ")
+            ])
+          ])) : vue.createCommentVNode("v-if", true),
+          $data.aID == 3 ? (vue.openBlock(), vue.createElementBlock("div", {
+            key: 4,
+            class: "introduce"
+          }, [
+            vue.createElementVNode("h4", null, "\u653B\u901F\u51CF\u5C11\u5E73a\u7684\u653B\u51FB\u95F4\u9694\uFF1A"),
+            vue.createElementVNode("p", null, [
+              vue.createTextVNode(" \u4E0D\u540C\u6B66\u5668\u6709\u4E0D\u540C\u7684\u653B\u51FB\u65F6\u95F4\u95F4\u9694"),
+              vue.createElementVNode("br"),
+              vue.createTextVNode(" \u62FF\u4E24\u4E2A\u6B66\u5668\u548C\u4E00\u4E2A\u6B66\u5668\uFF0C\u6709\u4E0D\u540C\u7684\u8BA1\u7B97\u516C\u5F0F"),
+              vue.createElementVNode("br"),
+              vue.createTextVNode(" \u4F7F\u7528\u6280\u80FD\u4F1A\u7ACB\u5373\u91CD\u7F6E\u653B\u51FB\u95F4\u9694\uFF0C\u65F6\u673A\u4E0D\u597D\u5C31\u4F1A\u5361\u624B ")
+            ]),
+            vue.createElementVNode("h4", null, "\u516C\u5F0F\uFF1A"),
+            vue.createElementVNode("p", null, [
+              vue.createTextVNode(" \u4EC5\u6301\u6709\u4E00\u4E2A\u6B66\u5668\u65F6\uFF1A "),
+              vue.createElementVNode("br"),
+              vue.createTextVNode(" \xA0\u653B\u51FB\u95F4\u9694 = (100% - \u653B\u901F\u503C) * \u6B66\u5668\u56FA\u6709\u653B\u51FB\u95F4\u9694"),
+              vue.createElementVNode("br"),
+              vue.createTextVNode(" \u6301\u6709\u4E24\u628A\u6B66\u5668\u65F6\uFF1A "),
+              vue.createElementVNode("br"),
+              vue.createTextVNode(" \xA0\u653B\u51FB\u95F4\u9694 = (100% - \u653B\u901F\u503C) * (\u5DE6\u95F4\u9694 + \u53F3\u95F4\u9694) / 1.5"),
+              vue.createElementVNode("br")
+            ])
+          ])) : vue.createCommentVNode("v-if", true)
+        ])
+      ]),
+      _: 1
+    }, 512);
+  }
+  var PagesIndexAttriInfo = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["render", _sfc_render$2], ["__file", "D:/Codes/\u6218\u77DB\u8BA1\u7B97\u5668\u9879\u76EEdemo/WarspearDmg/pages/index/attriInfo.vue"]]);
+  const _sfc_main$2 = {
+    data() {
+      return {
+        dmg: 0,
+        attriIndex: 0,
+        attrs: [
+          "acc",
+          "pene",
+          "crit",
+          "speed",
+          "attackStrength",
+          "superdmg",
+          "piericing",
+          "depthFury",
+          "rage",
+          "defPhysic",
+          "defMagic",
+          "dodge",
+          "parry",
+          "block"
+        ],
+        acc: 0,
+        pene: 0,
+        crit: 5,
+        speed: 0,
+        atk: 0,
+        criteff: 100,
+        pirck: 0,
+        fury: 0,
+        rage: 0,
+        defP: 0,
+        defPp: 0,
+        defM: 0,
+        defMp: 0,
+        dodge: 5,
+        parry: 0,
+        block: 0,
+        weaponL: 0,
+        weaponLRange: [
+          { value: 0, text: "\u7A7A\u624B", spd: 1.5 },
+          { value: 1, text: "\u5315\u9996 - 1.7", spd: 1.7 },
+          { value: 2, text: "\u5355\u624B\u5251 - 2.0", spd: 2 },
+          { value: 3, text: "\u5355\u624B\u65A7 - 2.2", spd: 2.2 },
+          { value: 4, text: "\u5355\u624B\u9524 - 2.4", spd: 2.4 },
+          { value: 5, text: "\u6CD5\u6756 - 3.1", spd: 3.1 },
+          { value: 6, text: "\u53CC\u624B\u9524\u5251\u65A7 - 3.2", spd: 3.2 },
+          { value: 7, text: "\u5F13 - 3.3", spd: 3.3 },
+          { value: 8, text: "\u6218\u77DB - 3.4", spd: 3.4 },
+          { value: 9, text: "\u5F29 - 3.9", spd: 3.9 }
+        ],
+        weaponR: 0,
+        weaponRRange: [
+          { value: 0, text: "\u7A7A\u624B", spd: 1.5 },
+          { value: 1, text: "\u5315\u9996 - 1.7", spd: 1.7 },
+          { value: 2, text: "\u5355\u624B\u5251 - 2.0", spd: 2 },
+          { value: 3, text: "\u5355\u624B\u65A7 - 2.2", spd: 2.2 },
+          { value: 4, text: "\u5355\u624B\u9524 - 2.4", spd: 2.4 }
+        ],
+        attackInterval: 0,
+        attackDMG_attri: 0,
+        speedL_attri: 0,
+        speedR_attri: 0
+      };
+    },
+    methods: {
+      changeAttri(value) {
+        this.pene = value;
+      },
+      show(e, index) {
+        this.attriIndex = index;
+        this.$refs.atrriinfo.hi(e, this.attriIndex);
+      },
+      iconURL(name) {
+        return "../../static/image/attribute/" + name + ".webp";
+      },
+      myRound(num, decimal) {
+        return Math.round(num * decimal) / decimal;
+      }
+    },
+    computed: {
+      speedL() {
+        let v2 = this.weaponLRange[this.weaponL].spd;
+        this.speedL_attri = v2;
+        return v2;
+      },
+      speedR() {
+        let v2 = this.weaponRRange[this.weaponR].spd;
+        this.speedR_attri = v2;
+        return v2;
+      },
+      defphyPercent() {
+        let d2 = this.defP;
+        let dmg = d2 / (d2 + 6500);
+        this.defPp = Math.round(dmg * 1e4) / 100;
+        return this.defPp + "%";
+      },
+      defmagPercent() {
+        let d2 = this.defM;
+        let dmg = d2 / (d2 + 6500);
+        this.defMp = Math.round(dmg * 1e4) / 100;
+        return this.defMp + "%";
+      },
+      attackDMG() {
+        let D2 = this.dmg;
+        let hitRate = (100 + this.acc - this.dodge) / 100;
+        if (hitRate > 1)
+          hitRate = 1;
+        D2 *= hitRate;
+        let crit = this.crit / 100;
+        let critEff = this.criteff / 100;
+        D2 = crit * 2 * D2 * critEff + (1 - crit) * D2;
+        let atk = this.atk / 100;
+        D2 = D2 * (1 + atk);
+        let def = this.defP;
+        let defPercent = def / (def + 6500);
+        let dmgReduceRate = defPercent - this.pene / 100;
+        if (dmgReduceRate < 0)
+          dmgReduceRate = 0;
+        D2 = D2 * (1 - dmgReduceRate);
+        this.attackDMG_attri = D2;
+        return D2;
+      },
+      attackDMGperSec() {
+        let isDual = this.weaponR != 0 ? true : false;
+        if (this.weaponL == 0 && this.weaponR == 0)
+          isDual = true;
+        let atkDmg = this.attackDMG_attri;
+        let atkinterval = isDual ? (1 - this.speed * 1 / 100) * (this.speedL_attri + this.speedR_attri) / 1.5 : (1 - this.speed * 1 / 100) * this.speedL_attri;
+        this.attackInterval = atkinterval;
+        let dmgPerSec = atkDmg / atkinterval;
+        return dmgPerSec;
+      }
+    },
+    components: {
+      AttriInfo: PagesIndexAttriInfo
+    }
+  };
+  function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_center = vue.resolveComponent("center");
+    const _component_uni_section = resolveEasycom(vue.resolveDynamicComponent("uni-section"), __easycom_0);
+    const _component_uni_number_box = resolveEasycom(vue.resolveDynamicComponent("uni-number-box"), __easycom_1);
+    const _component_uni_data_select = resolveEasycom(vue.resolveDynamicComponent("uni-data-select"), __easycom_2);
+    const _component_AttriInfo = vue.resolveComponent("AttriInfo");
+    return vue.openBlock(), vue.createElementBlock("div", null, [
+      vue.createVNode(_component_uni_section, {
+        title: "\u6218\u77DB\u4F24\u5BB3\u8BA1\u7B97\u516C\u5F0F",
+        type: "line",
+        padding: ""
+      }, {
+        default: vue.withCtx(() => [
+          vue.createElementVNode("div", { style: { "padding": "20px", "padding-top": "5px" } }, [
+            vue.createTextVNode(" \u4F24\u5BB3\u8BA1\u7B97\u516C\u5F0F: "),
+            vue.createElementVNode("br"),
+            vue.createElementVNode("br"),
+            vue.createVNode(_component_center, null, {
+              default: vue.withCtx(() => [
+                vue.createElementVNode("span", { class: "huati" }, "D = ((X + Y%) - A%) - B%")
+              ]),
+              _: 1
+            }),
+            vue.createElementVNode("div", { class: "huatiinfo" }, [
+              vue.createElementVNode("br"),
+              vue.createTextVNode("D - \u6700\u7EC8\u9020\u6210\u7684\u4F24\u5BB3 "),
+              vue.createElementVNode("br"),
+              vue.createTextVNode("X - \u4F60\u7684\u4F24\u5BB3\u503C "),
+              vue.createElementVNode("br"),
+              vue.createTextVNode("Y - \u4F60\u7684\u51F6\u731B\u5EA6 "),
+              vue.createElementVNode("br"),
+              vue.createTextVNode("A - \u76EE\u6807\u9632\u5FA1\u6BD4\u4F8B\uFF08\u5DF2\u51CF\u53BB\u7A7F\u900F\u767E\u5206\u6BD4\uFF09 "),
+              vue.createElementVNode("br"),
+              vue.createTextVNode("B - \u76EE\u6807\u5F39\u6027 "),
+              vue.createElementVNode("br"),
+              vue.createTextVNode("\u6CE8\uFF1A\u6B64\u5904\u7684\u52A0\u51CF\u8868\u793A\xD7(1\xB1x%) ")
+            ])
+          ])
+        ]),
+        _: 1
+      }),
+      vue.createVNode(_component_uni_section, {
+        title: "\u57FA\u7840\u4F24\u5BB3\u5C5E\u6027 (%)",
+        type: "line",
+        style: {},
+        padding: ""
+      }, {
+        default: vue.withCtx(() => [
+          vue.createElementVNode("div", { class: "props" }, [
+            vue.createElementVNode("image", {
+              onClick: _cache[0] || (_cache[0] = ($event) => $options.show($event, -1)),
+              src: "/static/image/dmg.png"
+            }),
+            vue.createVNode(_component_uni_number_box, {
+              value: $data.dmg,
+              onChange: _cache[1] || (_cache[1] = (v2) => {
+                $data.dmg = v2;
+              }),
+              max: 9999,
+              min: 0,
+              step: 0.1
+            }, null, 8, ["value", "step"])
+          ]),
+          vue.createElementVNode("div", { style: { "float": "left", "width": "100px", "height": "30px", "margin-bottom": "5px" } }),
+          vue.createElementVNode("div", { class: "props" }, [
+            vue.createElementVNode("image", {
+              onClick: _cache[2] || (_cache[2] = ($event) => $options.show($event, 0)),
+              src: $options.iconURL($data.attrs[0])
+            }, null, 8, ["src"]),
+            vue.createVNode(_component_uni_number_box, {
+              value: $data.acc,
+              onChange: _cache[3] || (_cache[3] = (v2) => {
+                $data.acc = v2;
+              }),
+              max: 50,
+              min: -999,
+              step: 0.1
+            }, null, 8, ["value", "step"])
+          ]),
+          vue.createElementVNode("div", { class: "props" }, [
+            vue.createElementVNode("image", {
+              onClick: _cache[4] || (_cache[4] = ($event) => $options.show($event, 1)),
+              src: $options.iconURL($data.attrs[1])
+            }, null, 8, ["src"]),
+            vue.createVNode(_component_uni_number_box, {
+              value: $data.pene,
+              onChange: _cache[5] || (_cache[5] = (v2) => {
+                $data.pene = v2;
+              }),
+              max: 50,
+              step: 0.1
+            }, null, 8, ["value", "step"])
+          ]),
+          vue.createElementVNode("div", { class: "props" }, [
+            vue.createElementVNode("image", {
+              onClick: _cache[6] || (_cache[6] = ($event) => $options.show($event, 2)),
+              src: $options.iconURL($data.attrs[2])
+            }, null, 8, ["src"]),
+            vue.createVNode(_component_uni_number_box, {
+              value: $data.crit,
+              onChange: _cache[7] || (_cache[7] = (v2) => {
+                $data.crit = v2;
+              }),
+              max: 53,
+              min: 0,
+              step: 0.1
+            }, null, 8, ["value", "step"])
+          ]),
+          vue.createElementVNode("div", { class: "props" }, [
+            vue.createElementVNode("image", {
+              onClick: _cache[8] || (_cache[8] = ($event) => $options.show($event, 3)),
+              src: $options.iconURL($data.attrs[3])
+            }, null, 8, ["src"]),
+            vue.createVNode(_component_uni_number_box, {
+              value: $data.speed,
+              onChange: _cache[9] || (_cache[9] = (v2) => {
+                $data.speed = v2;
+              }),
+              max: 70,
+              min: -999,
+              step: 0.1
+            }, null, 8, ["value", "step"])
+          ])
+        ]),
+        _: 1
+      }),
+      vue.createVNode(_component_uni_section, {
+        title: "\u9644\u52A0\u4F24\u5BB3\u5C5E\u6027 (%)",
+        type: "line",
+        style: {},
+        padding: ""
+      }, {
+        default: vue.withCtx(() => [
+          vue.createElementVNode("div", { class: "props" }, [
+            vue.createElementVNode("image", {
+              onClick: _cache[10] || (_cache[10] = ($event) => $options.show($event, 4)),
+              src: $options.iconURL($data.attrs[4])
+            }, null, 8, ["src"]),
+            vue.createVNode(_component_uni_number_box, {
+              value: $data.atk,
+              onChange: _cache[11] || (_cache[11] = (v2) => {
+                $data.atk = v2;
+              }),
+              max: 100,
+              step: 0.1
+            }, null, 8, ["value", "step"])
+          ]),
+          vue.createElementVNode("div", { class: "props" }, [
+            vue.createElementVNode("image", {
+              onClick: _cache[12] || (_cache[12] = ($event) => $options.show($event, 5)),
+              src: $options.iconURL($data.attrs[5])
+            }, null, 8, ["src"]),
+            vue.createVNode(_component_uni_number_box, {
+              value: $data.criteff,
+              onChange: _cache[13] || (_cache[13] = (v2) => {
+                $data.criteff = v2;
+              }),
+              max: 150,
+              min: 100,
+              step: 0.1
+            }, null, 8, ["value", "step"])
+          ]),
+          vue.createElementVNode("div", { class: "props" }, [
+            vue.createElementVNode("image", {
+              onClick: _cache[14] || (_cache[14] = ($event) => $options.show($event, 6)),
+              src: $options.iconURL($data.attrs[6])
+            }, null, 8, ["src"]),
+            vue.createVNode(_component_uni_number_box, {
+              value: $data.pirck,
+              onChange: _cache[15] || (_cache[15] = (v2) => {
+                $data.pirck = v2;
+              }),
+              max: 999,
+              step: 0.1
+            }, null, 8, ["value", "step"])
+          ]),
+          vue.createElementVNode("div", { class: "props" }, [
+            vue.createElementVNode("image", {
+              onClick: _cache[16] || (_cache[16] = ($event) => $options.show($event, 7)),
+              src: $options.iconURL($data.attrs[7])
+            }, null, 8, ["src"]),
+            vue.createVNode(_component_uni_number_box, {
+              value: $data.fury,
+              onChange: _cache[17] || (_cache[17] = (v2) => {
+                $data.fury = v2;
+              }),
+              max: 50,
+              step: 0.1
+            }, null, 8, ["value", "step"])
+          ]),
+          vue.createElementVNode("div", { class: "props" }, [
+            vue.createElementVNode("image", {
+              onClick: _cache[18] || (_cache[18] = ($event) => $options.show($event, 8)),
+              src: $options.iconURL($data.attrs[8])
+            }, null, 8, ["src"]),
+            vue.createVNode(_component_uni_number_box, {
+              value: $data.rage,
+              onChange: _cache[19] || (_cache[19] = (v2) => {
+                $data.rage = v2;
+              }),
+              max: 999,
+              step: 0.1
+            }, null, 8, ["value", "step"])
+          ])
+        ]),
+        _: 1
+      }),
+      vue.createVNode(_component_uni_section, {
+        title: "\u76EE\u6807\u9632\u5FA1\u5C5E\u6027",
+        type: "line",
+        style: {},
+        padding: ""
+      }, {
+        default: vue.withCtx(() => [
+          vue.createElementVNode("div", { class: "def_data_box" }, [
+            vue.createElementVNode("div", { class: "props" }, [
+              vue.createElementVNode("image", {
+                onClick: _cache[20] || (_cache[20] = ($event) => $options.show($event, 9)),
+                src: $options.iconURL($data.attrs[9])
+              }, null, 8, ["src"]),
+              vue.createVNode(_component_uni_number_box, {
+                value: $data.defP,
+                onChange: _cache[21] || (_cache[21] = (v2) => {
+                  $data.defP = v2;
+                }),
+                max: 26e3
+              }, null, 8, ["value"])
+            ]),
+            vue.createElementVNode("div", { class: "def_data" }, vue.toDisplayString($options.defphyPercent), 1)
+          ]),
+          vue.createElementVNode("div", { class: "def_data_box" }, [
+            vue.createElementVNode("div", { class: "props" }, [
+              vue.createElementVNode("image", {
+                onClick: _cache[22] || (_cache[22] = ($event) => $options.show($event, 10)),
+                src: $options.iconURL($data.attrs[10])
+              }, null, 8, ["src"]),
+              vue.createVNode(_component_uni_number_box, {
+                value: $data.defM,
+                onChange: _cache[23] || (_cache[23] = (v2) => {
+                  $data.defM = v2;
+                }),
+                max: 26e3
+              }, null, 8, ["value"])
+            ]),
+            vue.createElementVNode("div", { class: "def_data" }, vue.toDisplayString($options.defmagPercent), 1)
+          ]),
+          vue.createElementVNode("div", { class: "props" }, [
+            vue.createElementVNode("image", {
+              onClick: _cache[24] || (_cache[24] = ($event) => $options.show($event, 11)),
+              src: $options.iconURL($data.attrs[11])
+            }, null, 8, ["src"]),
+            vue.createVNode(_component_uni_number_box, {
+              value: $data.dodge,
+              onChange: _cache[25] || (_cache[25] = (v2) => {
+                $data.dodge = v2;
+              }),
+              max: 60,
+              min: -20,
+              step: 0.1
+            }, null, 8, ["value", "step"])
+          ]),
+          vue.createElementVNode("div", { class: "props" }, [
+            vue.createElementVNode("image", {
+              onClick: _cache[26] || (_cache[26] = ($event) => $options.show($event, 12)),
+              src: $options.iconURL($data.attrs[12])
+            }, null, 8, ["src"]),
+            vue.createVNode(_component_uni_number_box, {
+              value: $data.parry,
+              onChange: _cache[27] || (_cache[27] = (v2) => {
+                $data.parry = v2;
+              }),
+              max: 30,
+              step: 0.1
+            }, null, 8, ["value", "step"])
+          ]),
+          vue.createElementVNode("div", { class: "props" }, [
+            vue.createElementVNode("image", {
+              onClick: _cache[28] || (_cache[28] = ($event) => $options.show($event, 13)),
+              src: $options.iconURL($data.attrs[13])
+            }, null, 8, ["src"]),
+            vue.createVNode(_component_uni_number_box, {
+              value: $data.block,
+              onChange: _cache[29] || (_cache[29] = (v2) => {
+                $data.block = v2;
+              }),
+              max: 25,
+              step: 0.1
+            }, null, 8, ["value", "step"])
+          ])
+        ]),
+        _: 1
+      }),
+      vue.createVNode(_component_uni_section, {
+        title: "\u6B66\u5668\u7C7B\u578B",
+        type: "line",
+        style: {},
+        padding: ""
+      }, {
+        default: vue.withCtx(() => [
+          vue.createElementVNode("div", { class: "titlebox l" }, [
+            vue.createElementVNode("div", { class: "subtitile" }, "\u4E3B\u624B\u6B66\u5668\u7C7B\u578B"),
+            vue.createVNode(_component_uni_data_select, {
+              style: { "width": "160px" },
+              modelValue: $data.weaponL,
+              "onUpdate:modelValue": _cache[30] || (_cache[30] = ($event) => $data.weaponL = $event),
+              localdata: $data.weaponLRange,
+              onChange: _cache[31] || (_cache[31] = (v2) => {
+                $data.weaponL = v2;
+                if ($data.weaponL > 4 && $data.weaponR != 0)
+                  $data.weaponR = 0;
+              }),
+              clear: false
+            }, null, 8, ["modelValue", "localdata"])
+          ]),
+          vue.createElementVNode("div", { class: "titlebox r" }, [
+            vue.createElementVNode("div", { class: "subtitile" }, "\u526F\u624B\u6B66\u5668\u7C7B\u578B"),
+            vue.createVNode(_component_uni_data_select, {
+              style: { "width": "160px" },
+              modelValue: $data.weaponR,
+              "onUpdate:modelValue": _cache[32] || (_cache[32] = ($event) => $data.weaponR = $event),
+              localdata: $data.weaponRRange,
+              onChange: _cache[33] || (_cache[33] = (v2) => {
+                $data.weaponR = v2;
+              }),
+              clear: false,
+              disabled: $data.weaponL > 4 ? true : false
+            }, null, 8, ["modelValue", "localdata", "disabled"])
+          ]),
+          vue.createElementVNode("div", { class: "iconbox_tiny l" }, [
+            vue.createElementVNode("image", { src: "/static/image/attribute/spd.png" }),
+            vue.createElementVNode("div", null, vue.toDisplayString($options.speedL), 1)
+          ]),
+          vue.createElementVNode("div", { class: "iconbox_tiny r" }, [
+            vue.createElementVNode("image", { src: "/static/image/attribute/spd.png" }),
+            vue.createElementVNode("div", null, vue.toDisplayString($options.speedR), 1)
+          ]),
+          vue.createElementVNode("div", { class: "dmginterval" }, [
+            vue.createElementVNode("div", null, "\u603B\u653B\u51FB\u95F4\u9694"),
+            vue.createVNode(_component_center, null, {
+              default: vue.withCtx(() => [
+                vue.createElementVNode("span", { class: "huati" }, vue.toDisplayString($options.myRound($data.attackInterval, 100)), 1)
+              ]),
+              _: 1
+            })
+          ])
+        ]),
+        _: 1
+      }),
+      vue.createVNode(_component_uni_section, {
+        title: "\u5B9E\u6218\u4F24\u5BB3\u6A21\u62DF",
+        type: "line",
+        padding: ""
+      }, {
+        default: vue.withCtx(() => [
+          vue.createTextVNode(" \u5355\u6B21\u4F24\u5BB3\u671F\u671B\u503C: "),
+          vue.createElementVNode("br"),
+          vue.createElementVNode("br"),
+          vue.createVNode(_component_center, null, {
+            default: vue.withCtx(() => [
+              vue.createElementVNode("span", { class: "huati" }, vue.toDisplayString($options.myRound($options.attackDMG, 10)), 1)
+            ]),
+            _: 1
+          }),
+          vue.createTextVNode(" \u6BCF\u79D2\u5E73a\u4F24\u5BB3\u671F\u671B\u503C: "),
+          vue.createElementVNode("br"),
+          vue.createElementVNode("br"),
+          vue.createVNode(_component_center, null, {
+            default: vue.withCtx(() => [
+              vue.createElementVNode("span", { class: "huati" }, vue.toDisplayString($options.myRound($options.attackDMGperSec, 10)), 1)
+            ]),
+            _: 1
+          }),
+          vue.createElementVNode("div", { style: { "font-size": "12px", "color": "#4d4d4d", "display": "inline-block", "margin-top": "20px" } }, [
+            vue.createTextVNode(" (\u5E73a\u6216\u6280\u80FD\u4F24\u5BB3\uFF0C\u53D6\u51B3\u4E8E\u8BBE\u5B9A\u653B\u51FB\u529B)"),
+            vue.createElementVNode("br"),
+            vue.createTextVNode(" (\u628A\u8BBE\u5B9A\u653B\u51FB\u529B\u89C6\u4E3A\u5E73a) ")
+          ])
+        ]),
+        _: 1
+      }),
+      vue.createVNode(_component_AttriInfo, { ref: "atrriinfo" }, null, 512)
+    ]);
+  }
+  var DmgInFight = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["render", _sfc_render$1], ["__scopeId", "data-v-2b1d883a"], ["__file", "D:/Codes/\u6218\u77DB\u8BA1\u7B97\u5668\u9879\u76EEdemo/WarspearDmg/pages/index/dmgInFight.vue"]]);
   const _sfc_main$1 = {
     data() {
       return {
@@ -6242,15 +6995,15 @@ if (uni.restoreGlobal) {
     computed: {},
     components: {
       Switcher,
-      Calc: PagesIndexCalc
+      Calc: PagesIndexCalc,
+      DmgInFight
     }
   };
   function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_switcher = vue.resolveComponent("switcher");
     const _component_calc = vue.resolveComponent("calc");
-    const _component_center = vue.resolveComponent("center");
-    const _component_uni_section = resolveEasycom(vue.resolveDynamicComponent("uni-section"), __easycom_0$3);
-    return vue.openBlock(), vue.createElementBlock(vue.Fragment, null, [
+    const _component_DmgInFight = vue.resolveComponent("DmgInFight");
+    return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createElementVNode("div", {
         id: "logo",
         style: { "height": "200upx" }
@@ -6258,44 +7011,13 @@ if (uni.restoreGlobal) {
       vue.createElementVNode("h2", { id: "webtitle" }, [
         vue.createCommentVNode(" \u6218\u77DB\u5728\u7EBF\u4F24\u5BB3\u6A21\u62DF\u5668 ")
       ]),
-      vue.createElementVNode("view", { class: "container" }, [
+      vue.createElementVNode("div", { class: "container" }, [
         vue.createVNode(_component_switcher, { onChangeIndex: $options.changePage }, null, 8, ["onChangeIndex"]),
         $data.PageIndex == 1 ? (vue.openBlock(), vue.createElementBlock("div", { key: 0 }, [
           vue.createVNode(_component_calc)
         ])) : vue.createCommentVNode("v-if", true),
         $data.PageIndex == 2 ? (vue.openBlock(), vue.createElementBlock("div", { key: 1 }, [
-          vue.createVNode(_component_uni_section, {
-            title: "\u6218\u77DB\u4F24\u5BB3\u8BA1\u7B97\u516C\u5F0F",
-            type: "line",
-            padding: ""
-          }, {
-            default: vue.withCtx(() => [
-              vue.createElementVNode("div", { style: { "padding": "20px", "padding-top": "5px" } }, [
-                vue.createTextVNode(" \u4F24\u5BB3\u8BA1\u7B97\u516C\u5F0F: "),
-                vue.createElementVNode("br"),
-                vue.createElementVNode("br"),
-                vue.createVNode(_component_center, null, {
-                  default: vue.withCtx(() => [
-                    vue.createElementVNode("span", { class: "huati" }, "D = ((X + Y%) - A%) - B%")
-                  ]),
-                  _: 1
-                }),
-                vue.createElementVNode("div", { class: "huatiinfo" }, [
-                  vue.createElementVNode("br"),
-                  vue.createTextVNode("D - \u6700\u7EC8\u9020\u6210\u7684\u4F24\u5BB3 "),
-                  vue.createElementVNode("br"),
-                  vue.createTextVNode("X - \u4F60\u7684\u4F24\u5BB3\u503C "),
-                  vue.createElementVNode("br"),
-                  vue.createTextVNode("Y - \u4F60\u7684\u51F6\u731B\u5EA6 "),
-                  vue.createElementVNode("br"),
-                  vue.createTextVNode("A - \u76EE\u6807\u9632\u5FA1\u6BD4\u4F8B\uFF08\u5DF2\u51CF\u53BB\u7A7F\u900F\u767E\u5206\u6BD4\uFF09 "),
-                  vue.createElementVNode("br"),
-                  vue.createTextVNode("B - \u76EE\u6807\u5F39\u6027 ")
-                ])
-              ])
-            ]),
-            _: 1
-          })
+          vue.createVNode(_component_DmgInFight)
         ])) : vue.createCommentVNode("v-if", true)
       ]),
       vue.createElementVNode("div", { style: { "height": "5upx" } }),
@@ -6312,21 +7034,18 @@ if (uni.restoreGlobal) {
           href: "https://aurora.wsdb.xyz/en/calculator"
         }, "\u6218\u77DB\u505A\u68A6\u5668")
       ])
-    ], 64);
+    ]);
   }
   var PagesIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render], ["__file", "D:/Codes/\u6218\u77DB\u8BA1\u7B97\u5668\u9879\u76EEdemo/WarspearDmg/pages/index/index.vue"]]);
   __definePage("pages/index/index", PagesIndexIndex);
   __definePage("pages/index/calc", PagesIndexCalc);
+  __definePage("pages/index/attriInfo", PagesIndexAttriInfo);
   const _sfc_main = {
     onLaunch: function() {
-      formatAppLog("warn", "at App.vue:4", "\u5F53\u524D\u7EC4\u4EF6\u4EC5\u652F\u6301 uni_modules \u76EE\u5F55\u7ED3\u6784 \uFF0C\u8BF7\u5347\u7EA7 HBuilderX \u5230 3.1.0 \u7248\u672C\u4EE5\u4E0A\uFF01");
-      formatAppLog("log", "at App.vue:5", "App Launch");
     },
     onShow: function() {
-      formatAppLog("log", "at App.vue:8", "App Show");
     },
     onHide: function() {
-      formatAppLog("log", "at App.vue:11", "App Hide");
     }
   };
   var App = /* @__PURE__ */ _export_sfc(_sfc_main, [["__file", "D:/Codes/\u6218\u77DB\u8BA1\u7B97\u5668\u9879\u76EEdemo/WarspearDmg/App.vue"]]);

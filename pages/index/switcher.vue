@@ -40,6 +40,9 @@
 	li {
 		list-style: none;
 	}
+	ul {
+		padding-left:0 ;
+	}
 	#bars {
 		cursor: pointer;
 		position: absolute;

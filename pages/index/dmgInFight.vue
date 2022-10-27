@@ -274,6 +274,9 @@
 </script>
 
 <style>
+	uni-scroll-view {
+		z-index: 4;
+	}
 	.huati {
 		font-size: 120%;
 		font-weight: bold;
@@ -285,6 +288,11 @@
 		color: #4d4d4d;
 	}
 	.uni-section {
+		float: left;
+		width: 350px;
+	}
+	/* #ifdef H5 */
+	.uni-section {
 		margin: 10px;
 		float: left;
 		width: 350px;
@@ -292,6 +300,7 @@
 		border-radius: 10px;
 		box-shadow: 1px 2px 3px #4d4d4d;
 	}
+	/* #endif */
 	.def_data_box {
 		height: 30px;
 		margin-bottom: 5px;
@@ -361,9 +370,9 @@
 		color: gray;
 		font-size: 12px;
 	}
-	@media screen and (max-width:360px){
+	@media screen and (max-width:380px){
 		.uni-section {
-			margin: 5px;
+			margin-left: 5px;
 		}
 	}
 </style>

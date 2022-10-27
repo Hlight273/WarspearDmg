@@ -1,58 +1,5 @@
 /* 水平间距 */
 /* 水平间距 */
-.uni-section[data-v-f7ca1098] {
-  background-color: #fff;
-}
-.uni-section .uni-section-header[data-v-f7ca1098] {
-  position: relative;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding: 12px 10px;
-  font-weight: normal;
-}
-.uni-section .uni-section-header__decoration[data-v-f7ca1098] {
-  margin-right: 6px;
-  background-color: #2979ff;
-}
-.uni-section .uni-section-header__decoration.line[data-v-f7ca1098] {
-  width: 4px;
-  height: 12px;
-  border-radius: 10px;
-}
-.uni-section .uni-section-header__decoration.circle[data-v-f7ca1098] {
-  width: 8px;
-  height: 8px;
-  border-top-right-radius: 50px;
-  border-top-left-radius: 50px;
-  border-bottom-left-radius: 50px;
-  border-bottom-right-radius: 50px;
-}
-.uni-section .uni-section-header__decoration.square[data-v-f7ca1098] {
-  width: 8px;
-  height: 8px;
-}
-.uni-section .uni-section-header__content[data-v-f7ca1098] {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  color: #333;
-}
-.uni-section .uni-section-header__content .distraction[data-v-f7ca1098] {
-  flex-direction: row;
-  align-items: center;
-}
-.uni-section .uni-section-header__content-sub[data-v-f7ca1098] {
-  margin-top: 2px;
-}
-.uni-section .uni-section-header__slot-right[data-v-f7ca1098] {
-  font-size: 14px;
-}
-.uni-section .uni-section-content[data-v-f7ca1098] {
-  font-size: 14px;
-}
-/* 水平间距 */
-/* 水平间距 */
 .uniui-color[data-v-a2e81f6e]:before {
   content: "\e6cf";
 }
@@ -588,6 +535,9 @@
 li[data-v-1b6fdd37] {
 		list-style: none;
 }
+ul[data-v-1b6fdd37] {
+		padding-left:0 ;
+}
 #bars[data-v-1b6fdd37] {
 		cursor: pointer;
 		position: absolute;
@@ -813,6 +763,59 @@ li[data-v-1b6fdd37] {
 }
 .uni-numbox .uni-numbox--disabled[data-v-dd94a2a8] {
   color: #c0c0c0 !important;
+}
+/* 水平间距 */
+/* 水平间距 */
+.uni-section[data-v-f7ca1098] {
+  background-color: #fff;
+}
+.uni-section .uni-section-header[data-v-f7ca1098] {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 12px 10px;
+  font-weight: normal;
+}
+.uni-section .uni-section-header__decoration[data-v-f7ca1098] {
+  margin-right: 6px;
+  background-color: #2979ff;
+}
+.uni-section .uni-section-header__decoration.line[data-v-f7ca1098] {
+  width: 4px;
+  height: 12px;
+  border-radius: 10px;
+}
+.uni-section .uni-section-header__decoration.circle[data-v-f7ca1098] {
+  width: 8px;
+  height: 8px;
+  border-top-right-radius: 50px;
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px;
+  border-bottom-right-radius: 50px;
+}
+.uni-section .uni-section-header__decoration.square[data-v-f7ca1098] {
+  width: 8px;
+  height: 8px;
+}
+.uni-section .uni-section-header__content[data-v-f7ca1098] {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  color: #333;
+}
+.uni-section .uni-section-header__content .distraction[data-v-f7ca1098] {
+  flex-direction: row;
+  align-items: center;
+}
+.uni-section .uni-section-header__content-sub[data-v-f7ca1098] {
+  margin-top: 2px;
+}
+.uni-section .uni-section-header__slot-right[data-v-f7ca1098] {
+  font-size: 14px;
+}
+.uni-section .uni-section-content[data-v-f7ca1098] {
+  font-size: 14px;
 }
 /* 水平间距 */
 /* 水平间距 */
@@ -1124,6 +1127,16 @@ li[data-v-1b6fdd37] {
 		font-size: 12px;
 		color: gray;
 }
+.clothe_inputbox[data-v-6214fb64] {
+		float: left;
+		margin-right: 30px;
+		width: 90px;
+}
+@media screen and (max-width:360px){
+.uni-section[data-v-6214fb64] {
+			margin: 5px;
+}
+}
 
 
 a {
@@ -1200,6 +1213,150 @@ a {
 
 
 
+
+
+
+
+
+.helpbox {
+		margin-bottom: 50px;
+		padding: 40px;
+		box-sizing: border-box;
+		width: 400px;
+		height: 300px;
+		background-color: #fff;
+		border-radius: 10px;
+}
+.helpbox_icon {
+		position: absolute;
+		width: 43px;
+		height: 43px;
+}
+.helpbox_iconborder {
+		position: absolute;
+		top:29px;
+		left: 29px;
+		width: 65px;
+		height: 65px;
+}
+.helpbox h2{
+		float: left;
+		margin-left: 60px;
+		font-weight: normal;
+		font-size: 20px;
+		line-height: 20px;
+		color: #4d4d4d;
+}
+.introduce {
+		margin-top: 70px;
+		width: 320px;
+		height: 160px;
+		font-weight: normal;
+		font-size: 12px;
+		color: #4d4d4d;
+}
+.introduce p {
+		/*text-indent: 2em;*/
+		margin-left: 5px;
+}
+.introduce h4 {
+		margin: 10px auto 2px auto;
+}
+
+
+uni-scroll-view[data-v-2b1d883a] {
+		z-index: 4;
+}
+.huati[data-v-2b1d883a] {
+		font-size: 120%;
+		font-weight: bold;
+		font-style: italic;
+		font-family: 'Times New Roman', Times, serif;
+}
+.huatiinfo[data-v-2b1d883a] {
+		font-size: 12px;
+		color: #4d4d4d;
+}
+.uni-section[data-v-2b1d883a] {
+		float: left;
+		width: 350px;
+}
+.def_data_box[data-v-2b1d883a] {
+		height: 30px;
+		margin-bottom: 5px;
+}
+.props[data-v-2b1d883a] {
+		float: left;
+		margin-right: 20px;
+}
+.props[data-v-2b1d883a]:nth-child(even)::after {
+		display: block;
+		height: 10px;
+		content: " ";
+}
+.def_data[data-v-2b1d883a] {
+		margin-left: 20px;
+		float: left;
+		width: 140px;
+		line-height: 25px;
+		color: gray;
+		font-size: 12px;
+}
+.props uni-image[data-v-2b1d883a]{
+		float: left;
+		margin-right: 10px;
+		width: 30px;
+		height: 30px;
+}
+.props uni-number-box[data-v-2b1d883a] {
+		float: left;
+}
+.l[data-v-2b1d883a] {float: left;}
+.r[data-v-2b1d883a] {float: right;}
+.titlebox[data-v-2b1d883a] {
+		margin-top: 10px;
+		position: relative;
+}
+.subtitile[data-v-2b1d883a] {
+		position: absolute;
+		left: 0.625rem;
+		top: -20px;
+		font-size: 12px;
+		color: gray;
+}
+.iconbox_tiny[data-v-2b1d883a] {
+		margin-top: 10px;
+		width: 160px;
+		color: #4d4d4d;
+		line-height: 20px;
+}
+.iconbox_tiny uni-image[data-v-2b1d883a] {
+		float: left;
+		width: 20px;
+		height: 20px;
+}
+.iconbox_tiny div[data-v-2b1d883a] {
+		margin-left: 10px;
+		float: left;
+		color: #4d4d4d;
+		line-height: 20px;
+}
+.dmginterval[data-v-2b1d883a] {
+		margin: 10px;
+		margin-top: 100px;
+}
+.dmginterval>div[data-v-2b1d883a]{
+		margin-right: 20px;
+		color: gray;
+		font-size: 12px;
+}
+@media screen and (max-width:380px){
+.uni-section[data-v-2b1d883a] {
+			margin-left: 5px;
+}
+}
+
+
 .huati {
 		font-size: 120%;
 		font-weight: bold;
@@ -1272,6 +1429,13 @@ a {
 
 
 
+
+
+
+
+
+
+
 	
 	/*非电脑端*/
 #logo {
@@ -1279,7 +1443,7 @@ a {
 					no-repeat;
 		background-size: 200px;
 		background-position: 50% 10px;
-		margin-top: 2.5rem;
+		margin-top: 2.8125rem;
 }
 #webtitle {
 		position: absolute;
@@ -1287,5 +1451,9 @@ a {
 		left: calc(50% - 108px);
 		text-align: center;
 		color: aliceblue;
+}
+.author {
+		margin-top: 40px;
+		overflow: hidden;
 }
 
