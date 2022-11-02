@@ -4,9 +4,9 @@
 			<div style="padding:20px;padding-top: 5px;">
 				伤害计算公式:
 				<br><br>
-				<center>
+				<div style="text-align: center;">
 					<span class="huati">D = ((X + Y%) - A%) - B%</span>
-				</center>
+				</div>
 				<div class="huatiinfo">
 					<br>D - 最终造成的伤害
 					<br>X - 你的伤害值  
@@ -41,8 +41,8 @@
 				<uni-number-box :value="pirck" @change="(v)=>{pirck=v}" :max="999" :step="0.1" /></div>
 			<div class="props"><image @click="show($event,7)" :src="iconURL(attrs[7])"></image>
 				<uni-number-box :value="fury" @change="(v)=>{fury=v}" :max="50" :step="0.1" /></div>
-			<div class="props"><image @click="show($event,8)" :src="iconURL(attrs[8])"></image>
-				<uni-number-box :value="rage" @change="(v)=>{rage=v}" :max="999" :step="0.1" /></div>
+			<!-- <div class="props"><image @click="show($event,8)" :src="iconURL(attrs[8])"></image>
+				<uni-number-box :value="rage" @change="(v)=>{rage=v}" :max="999" :step="0.1" /></div> -->
 		</uni-section>
 		
 		<uni-section title="目标防御属性" type="line" style="" padding>
@@ -99,9 +99,9 @@
 			</div>
 			<div class="dmginterval">
 				<div>总攻击间隔</div>
-				<center>
+				<div style="text-align: center;">
 					<span class="huati">{{myRound(attackInterval,100)}}</span>
-				</center>
+				</div>
 			</div>
 				
 		</uni-section>
@@ -109,14 +109,14 @@
 		<uni-section title="实战伤害模拟" type="line" padding>
 			单次伤害期望值:
 			<br><br>
-			<center>
+			<div style="text-align: center;">
 				<span class="huati">{{myRound(attackDMG,10)}}</span>
-			</center>
+			</div>
 			每秒平a伤害期望值:
 			<br><br>
-			<center>
+			<div style="text-align: center;">
 				<span class="huati">{{myRound(attackDMGperSec,10)}}</span>
-			</center>
+			</div>
 			<div style="font-size: 12px;color: #4d4d4d;display: inline-block;margin-top: 20px;">
 				(平a或技能伤害，取决于设定攻击力)<br>
 				(把设定攻击力视为平a)
@@ -228,9 +228,13 @@
 			attackDMG(){
 				let D = this.dmg;
 				
+				let blockRate = this.block*1.0/100;
+
+				let parryRate = this.parry*1.0/100;
+				
 				let hitRate = (100 + this.acc - this.dodge)/100;
 				if(hitRate > 1) hitRate = 1.0;
-				D *= hitRate;
+				D *= (1-blockRate) * (1-parryRate) * hitRate;
 				
 				let crit = this.crit/100;
 				let critEff = this.criteff/100;
@@ -243,6 +247,10 @@
 				let defPercent = def / (def + 6500);
 				let dmgReduceRate  = defPercent - this.pene/100;
 				if(dmgReduceRate < 0) dmgReduceRate = 0.0;
+				
+				let pirkRate = this.pirck*1.0/100;
+				dmgReduceRate = pirkRate * 0 + (1-pirkRate) * dmgReduceRate;
+				
 				D = D * (1 - dmgReduceRate);
 				
 				this.attackDMG_attri = D;

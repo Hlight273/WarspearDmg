@@ -20,12 +20,17 @@
 				<DmgInFight></DmgInFight>
 			</div>
 			
+			<div v-if="PageIndex==3">
+				<GameTips1></GameTips1>
+			</div>
+			
 		</div>
 		<div style="height: 5upx;"></div>
 		<div class="author">作者qq2732149714，请联系他修复bug！<br>
 		数据仅供参考，实际效果以游戏为准！<br>
 		战矛萌新群群号: 851922086 <br>
-		传送门：<a target=“_blank” href="https://aurora.wsdb.xyz/en/calculator">战矛做梦器</a></div>
+		传送门：<a target="_blank" href="https://aurora.wsdb.xyz/en/calculator">战矛做梦器</a><br>
+		传送门：<a target="_blank" href="https://forum.warspear-online.com/index.php?/forum/310-%E6%8C%87%E5%8D%97/">战矛职业技能介绍</a></div>
 	</view>
 	
 </template>
@@ -34,6 +39,7 @@
 	import Switcher from './switcher.vue'
 	import Calc from "./calc.vue"
 	import DmgInFight from "./dmgInFight.vue"
+	import GameTips1 from "./gameTips1.vue"
 	export default {
 		data() {
 			return {
@@ -53,6 +59,7 @@
 			Switcher,
 			Calc,
 			DmgInFight,
+			GameTips1,
 		},
 	}
 </script>
@@ -72,7 +79,7 @@
 	
 	a {
 		text-decoration: none;
-		color: #b37011;
+		color: #ffb700;
 	}
 	.l {
 		float: left;
